@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
-import './assets/scss/reset.scss';
+import './assets/scss/index.scss';
 import 'rsuite/dist/rsuite.min.css';
 import store from './store';
 
