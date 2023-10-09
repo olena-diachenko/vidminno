@@ -64,7 +64,7 @@ const SignUp = () => {
                 <Panel
                     header={<h3>Create an Account</h3>}
                     bordered
-                    style={{ background: '#fff', width: 400 }}
+                    style={{ width: 400 }}
                 >
                     <p>
                         <span>Already have an account?</span>{' '}
