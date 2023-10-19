@@ -26,18 +26,26 @@ import DashboardIcon from '@rsuite/icons/Dashboard';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdOutlineLightMode, MdOutlineNightlight } from 'react-icons/md';
 import { changeTheme } from '../../store/slices/theme';
+import admin from '../../utils/admin';
 import styles from './style.module.scss';
 
 const DefaultTemplate = props => {
     const [expand, setExpand] = React.useState(true);
     const trigger = React.useRef();
-    const user = localStorage.getItem('user');
+    const user = useSelector(state => state.auth.user);
+    const isAdmin = `${admin.name} ${admin.surname}`;
     const theme = useSelector(state => state.theme.theme);
     const dispatch = useDispatch();
 
     const handleChangeTheme = () => {
         dispatch(changeTheme());
     };
+
+    const NavLink = React.forwardRef(({ href, children, ...rest }, ref) => (
+        <Link ref={ref} to={href} {...rest}>
+            {children}
+        </Link>
+    ));
 
     const renderUserSpeaker = (options, ref) => {
         const handleSelect = () => {
@@ -53,7 +61,9 @@ const DefaultTemplate = props => {
                 <Dropdown.Menu onSelect={handleSelect}>
                     <div className={styles.popover__items}>
                         <p>Signed in as</p>
-                        <strong>Student</strong>
+                        <strong>
+                            {isAdmin === user ? 'Admin' : 'Student'}
+                        </strong>
                         <Dropdown.Separator />
                         <Link to="/sign-in" className={styles.popover__link}>
                             Sign out
@@ -94,7 +104,12 @@ const DefaultTemplate = props => {
                     >
                         <Sidenav.Body>
                             <Nav>
-                                <Nav.Item eventKey="1" icon={<DashboardIcon />}>
+                                <Nav.Item
+                                    eventKey="1"
+                                    icon={<DashboardIcon />}
+                                    as={NavLink}
+                                    href="/"
+                                >
                                     Dashboard
                                 </Nav.Item>
                                 <Nav.Menu
