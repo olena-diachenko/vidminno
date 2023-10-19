@@ -11,6 +11,8 @@ import {
 import EyeIcon from '@rsuite/icons/legacy/Eye';
 import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../../../store/slices/auth';
 
 const SignIn = () => {
     const formRef = React.useRef();
@@ -20,6 +22,7 @@ const SignIn = () => {
         password: '',
     });
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { StringType } = Schema.Types;
 
     const model = Schema.Model({
@@ -29,7 +32,7 @@ const SignIn = () => {
 
     const handleSubmit = async e => {
         if (!formRef.current.check()) return;
-        localStorage.setItem('user', formValue.username);
+        dispatch(setCredentials(formValue.username));
         navigate('/');
     };
 
