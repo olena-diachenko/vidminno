@@ -1,0 +1,16 @@
+@import "src/assets/scss";
+
+.dashboard {
+  &__socials {
+    padding: 18px;
+    font-size: 20px;
+    background: $background-color;
+    color: $light-text-color;
+    border-radius: 5px;
+    margin-bottom: 30px;
+  }
+
+  &__heading {
+    margin-bottom: 30px;
+  }
+}
