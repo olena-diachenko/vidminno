@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     Divider,
     FlexboxGrid,
@@ -7,6 +8,7 @@ import {
     Grid,
     Row,
     Col,
+    Loader,
 } from 'rsuite';
 import FacebookSquareIcon from '@rsuite/icons/legacy/FacebookSquare';
 import GithubAltIcon from '@rsuite/icons/legacy/GithubAlt';
@@ -14,97 +16,51 @@ import TelegramIcon from '@rsuite/icons/legacy/Telegram';
 import LinkedinIcon from '@rsuite/icons/legacy/Linkedin';
 import InstagramIcon from '@rsuite/icons/legacy/Instagram';
 import { useSelector } from 'react-redux';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-    ArcElement,
-} from 'chart.js';
 import { Bar, Doughnut } from 'react-chartjs-2';
+import { Link } from 'react-router-dom';
+import { useGetStudentsByGradeQuery } from '../../store/api/usersApi';
+import { useGetJsLessonsQuery } from '../../store/api/jsLessonsApi';
+import { useGetReactLessonsQuery } from '../../store/api/reactLessonsApi';
+import { useGetUsefulVideosQuery } from '../../store/api/usefulVideosApi';
 import SignUp from '../auth/signUp';
 import DefaultTemplate from '../../templates/defaultPage';
+import DashList from '../../components/DashList';
+import Slider from '../../components/Slider';
+import {
+    options,
+    barbBackgroundColors,
+    barBorderColors,
+} from '../../utils/charts';
 import styles from './style.module.scss';
 
 const HomePage = () => {
     const user = useSelector(state => state.auth.user);
-
-    ChartJS.register(
-        ArcElement,
-        CategoryScale,
-        LinearScale,
-        BarElement,
-        Title,
-        Tooltip,
-        Legend
-    );
+    const { data: users, isLoading } = useGetStudentsByGradeQuery();
+    const { data: jsLessons, isLoading: isLoad } = useGetJsLessonsQuery(5);
+    const { data: reactLessons, isLoading: isLoadLessons } =
+        useGetReactLessonsQuery(5);
+    const { data: videos, isLoading: isLoadVideos } = useGetUsefulVideosQuery();
 
     const donatData = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['0-50 points', '50-75 points', '75-100 points'],
         datasets: [
             {
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+                label: '%',
+                data: [4, 10, 86],
+                backgroundColor: barbBackgroundColors,
+                borderColor: barBorderColors,
                 borderWidth: 1,
             },
         ],
     };
 
-    const options = {
-        indexAxis: 'y',
-        elements: {
-            bar: {
-                borderWidth: 2,
-            },
-        },
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'none',
-            },
-        },
-    };
-
-    const labels = [
-        'Olena',
-        'Petro',
-        'Volodymyr',
-        'Oksana',
-        'Alisa',
-        'Mykyta',
-        'Oleksandra',
-        'Viktoriia',
-        'Oleh',
-        'Maksym',
-        'Alina',
-        'Yuliia',
-    ];
-
     const barData = {
-        labels,
+        labels: !isLoading && users.map(userData => userData.username),
         datasets: [
             {
                 label: 'Average course grade',
-                data: [99, 70, 85, 80, 95, 98],
+                data:
+                    !isLoading && users.map(userData => userData.averageGrade),
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
@@ -126,54 +82,54 @@ const HomePage = () => {
                             as="a"
                             href="https://t.me/e_diachenko"
                             target="_blank"
-                            style={{ fontSize: 40 }}
+                            className={styles.dashboard__icon}
                         ></IconButton>
                         <IconButton
                             icon={<FacebookSquareIcon />}
                             as="a"
                             href="https://www.facebook.com/profile.php?id=100001535963306"
                             target="_blank"
-                            style={{ fontSize: 40 }}
+                            className={styles.dashboard__icon}
                         ></IconButton>
                         <IconButton
                             icon={<GithubAltIcon />}
                             as="a"
                             href="https://github.com/olena-diachenko"
                             target="_blank"
-                            style={{ fontSize: 40 }}
+                            className={styles.dashboard__icon}
                         ></IconButton>
                         <IconButton
                             icon={<LinkedinIcon />}
                             as="a"
                             href="https://www.linkedin.com/in/olena-diachenko-2a5784266/"
                             target="_blank"
-                            style={{ fontSize: 40 }}
+                            className={styles.dashboard__icon}
                         ></IconButton>
                         <IconButton
                             icon={<InstagramIcon />}
                             as="a"
                             href="https://www.instagram.com/elenadiachenko_/"
                             target="_blank"
-                            style={{ fontSize: 40 }}
+                            className={styles.dashboard__icon}
                         ></IconButton>
                     </Stack>
                 </FlexboxGrid>
                 <h3 className={styles.dashboard__heading}>Dashboard</h3>
                 <Grid fluid>
-                    <Row className="show-grid" gutter={20}>
+                    <Row
+                        className="show-grid"
+                        gutter={20}
+                        style={{ marginBottom: 30 }}
+                    >
                         <Col sm={24} md={24} lg={8}>
                             <Panel
                                 shaded
                                 bordered
                                 bodyFill
-                                style={{ height: '430px' }}
+                                className={styles.dashboard__chart}
+                                header="Scores"
                             >
-                                <Panel
-                                    header="Scores"
-                                    style={{ textAlign: 'center' }}
-                                >
-                                    <Doughnut data={donatData} />
-                                </Panel>
+                                <Doughnut data={donatData} />
                             </Panel>
                         </Col>
                         <Col sm={24} md={24} lg={16}>
@@ -181,14 +137,87 @@ const HomePage = () => {
                                 shaded
                                 bordered
                                 bodyFill
-                                style={{ height: '430px' }}
+                                className={styles.dashboard__chart}
+                                header="Course rating"
                             >
-                                <Panel
-                                    header="Course rating"
-                                    style={{ textAlign: 'center' }}
-                                >
+                                {isLoading ? (
+                                    <Loader size="lg" />
+                                ) : (
                                     <Bar options={options} data={barData} />
-                                </Panel>
+                                )}
+                            </Panel>
+                        </Col>
+                    </Row>
+                    <Row
+                        className="show-grid"
+                        gutter={20}
+                        style={{ marginBottom: 30 }}
+                    >
+                        <Col sm={24} md={24} lg={24}>
+                            <Panel
+                                shaded
+                                bordered
+                                bodyFill
+                                className={styles.dashboard__section}
+                            >
+                                <h3 className={styles.dashboard__courseHeading}>
+                                    <Link
+                                        to="/js-course/lessons"
+                                        className={
+                                            styles.dashboard__headingLink
+                                        }
+                                    >
+                                        JS Course
+                                    </Link>
+                                </h3>
+                                {!isLoad && <DashList lessons={jsLessons} />}
+                            </Panel>
+                        </Col>
+                    </Row>
+                    <Row
+                        className="show-grid"
+                        gutter={20}
+                        style={{ marginBottom: 30 }}
+                    >
+                        <Col sm={24} md={24} lg={24}>
+                            <Panel
+                                shaded
+                                bordered
+                                bodyFill
+                                className={styles.dashboard__section}
+                            >
+                                <h3 className={styles.dashboard__courseHeading}>
+                                    <Link
+                                        to="/react-course/lessons"
+                                        className={
+                                            styles.dashboard__headingLink
+                                        }
+                                    >
+                                        React Course
+                                    </Link>
+                                </h3>
+                                {!isLoadLessons && (
+                                    <DashList lessons={reactLessons} />
+                                )}
+                            </Panel>
+                        </Col>
+                    </Row>
+                    <Row
+                        className="show-grid"
+                        gutter={20}
+                        style={{ marginBottom: 30 }}
+                    >
+                        <Col sm={24} md={24} lg={24}>
+                            <Panel
+                                shaded
+                                bordered
+                                bodyFill
+                                className={styles.dashboard__section}
+                            >
+                                <h3 className={styles.dashboard__courseHeading}>
+                                    Useful videos
+                                </h3>
+                                {!isLoadVideos && <Slider videos={videos} />}
                             </Panel>
                         </Col>
                     </Row>
