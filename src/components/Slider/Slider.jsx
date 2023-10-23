@@ -8,6 +8,7 @@ const Slider = props => {
         <Carousel className="custom-slider" shape="bar">
             {data.map(video => (
                 <iframe
+                    title="Useful video"
                     key={video.id}
                     src={video.src}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
