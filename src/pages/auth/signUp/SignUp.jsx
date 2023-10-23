@@ -12,7 +12,7 @@ import EyeIcon from '@rsuite/icons/legacy/Eye';
 import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useCreateUserMutation } from '../../../store/usersApi';
+import { useCreateUserMutation } from '../../../store/api/usersApi';
 import PopUp from '../../../components/PopUp';
 import { openPopUp } from '../../../store/slices/popUp';
 

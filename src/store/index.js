@@ -10,13 +10,19 @@ import {
     REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { usersApi } from './usersApi';
+import { usersApi } from './api/usersApi';
 import popUpReducer from './slices/popUp';
 import themeReducer from './slices/theme';
 import authReducer from './slices/auth';
+import { jsLessonsApi } from './api/jsLessonsApi';
+import { reactLessonsApi } from './api/reactLessonsApi';
+import { usefulVideosApi } from './api/usefulVideosApi';
 
 const rootReducer = combineReducers({
     [usersApi.reducerPath]: usersApi.reducer,
+    [jsLessonsApi.reducerPath]: jsLessonsApi.reducer,
+    [reactLessonsApi.reducerPath]: reactLessonsApi.reducer,
+    [usefulVideosApi.reducerPath]: usefulVideosApi.reducer,
     popUp: popUpReducer,
     theme: themeReducer,
     auth: authReducer,
@@ -25,7 +31,12 @@ const rootReducer = combineReducers({
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: [usersApi.reducerPath],
+    blacklist: [
+        usersApi.reducerPath,
+        jsLessonsApi.reducerPath,
+        reactLessonsApi.reducerPath,
+        usefulVideosApi.reducerPath,
+    ],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -45,7 +56,12 @@ const store = configureStore({
                     REGISTER,
                 ],
             },
-        }).concat(usersApi.middleware),
+        }).concat(
+            usersApi.middleware,
+            jsLessonsApi.middleware,
+            reactLessonsApi.middleware,
+            usefulVideosApi.middleware
+        ),
 });
 
 export const persistor = persistStore(store);
