@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Container,
     Header,
+    Footer,
     Content,
     Sidenav,
     Nav,
@@ -21,10 +22,11 @@ import {
     FaReact,
     FaRegNewspaper,
     FaUser,
+    FaMoon,
 } from 'react-icons/fa';
 import DashboardIcon from '@rsuite/icons/Dashboard';
 import { useSelector, useDispatch } from 'react-redux';
-import { MdOutlineLightMode, MdOutlineNightlight } from 'react-icons/md';
+import { MdOutlineLightMode } from 'react-icons/md';
 import { changeTheme } from '../../store/slices/theme';
 import admin from '../../utils/admin';
 import styles from './style.module.scss';
@@ -33,8 +35,8 @@ const DefaultTemplate = props => {
     const [expand, setExpand] = React.useState(true);
     const trigger = React.useRef();
     const user = useSelector(state => state.auth.user);
-    const isAdmin = `${admin.name} ${admin.surname}`;
     const theme = useSelector(state => state.theme.theme);
+    const isAdmin = `${admin.name} ${admin.surname}`;
     const dispatch = useDispatch();
 
     const handleChangeTheme = () => {
@@ -72,6 +74,10 @@ const DefaultTemplate = props => {
                 </Dropdown.Menu>
             </Popover>
         );
+    };
+
+    const expandHandler = () => {
+        setExpand(!expand);
     };
 
     return (
@@ -148,7 +154,7 @@ const DefaultTemplate = props => {
                     <Navbar appearance="subtle" className="nav-toggle">
                         <Nav pullRight>
                             <Nav.Item
-                                onClick={() => setExpand(!expand)}
+                                onClick={expandHandler}
                                 className={styles.sidebar__navItem}
                                 icon={
                                     <Icon
@@ -183,7 +189,7 @@ const DefaultTemplate = props => {
                             <Icon
                                 as={
                                     theme === 'light'
-                                        ? MdOutlineNightlight
+                                        ? FaMoon
                                         : MdOutlineLightMode
                                 }
                                 onClick={handleChangeTheme}
@@ -194,6 +200,10 @@ const DefaultTemplate = props => {
                     <Content className={styles.content}>
                         {props.children}
                     </Content>
+                    <Footer className={styles.footer}>
+                        Copyright &copy; V I D M I N N O,{' '}
+                        {new Date().getFullYear()}
+                    </Footer>
                 </Container>
             </Container>
         </>
