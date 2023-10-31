@@ -1,4 +1,4 @@
-@import "src/assets/scss";
+@import "src/assets/styles";
 
 .sidebar {
   display: flex;
@@ -97,4 +97,12 @@
 
 .content {
   padding: 30px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 12px;
+  height: 56px;
 }

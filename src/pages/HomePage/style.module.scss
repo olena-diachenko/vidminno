@@ -1,0 +1,60 @@
+@import "src/assets/styles";
+
+.dashboard {
+  &__socials {
+    padding: 18px;
+    font-size: 20px;
+    background: $background-color;
+    color: $light-text-color;
+    border-radius: 5px;
+    margin-bottom: 30px;
+  }
+
+  &__icon {
+    font-size: 40px;
+  }
+
+  &__heading {
+    margin-bottom: 30px;
+  }
+
+  &__courseHeading {
+    padding: 15px 30px;
+  }
+
+  &__headingLink {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      text-decoration: none;
+      color: inherit;
+      opacity: 0.8;
+    }
+  }
+
+  &__chart {
+    height: 430px;
+    transition: all 0.3s ease;
+    text-align: center;
+    padding: 20px;
+
+    &:hover {
+      box-shadow: 5px 5px 5px $light-background-color;
+    }
+  }
+
+  &__section {
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 5px 5px 5px $light-background-color;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    &__chart {
+      height: 380px;
+    }
+  }
+}
