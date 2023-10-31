@@ -2,13 +2,13 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { CustomProvider } from 'rsuite';
 import { useSelector } from 'react-redux';
-import HomePage from './pages/homePage';
-import SignUp from './pages/auth/signUp';
-import SignIn from './pages/auth/signIn';
-import JSHomeworks from './pages/js/jsHomeworks';
-import JSLessons from './pages/js/jsLessons';
-import ReactLessons from './pages/react/reactLessons';
-import ReactHomeworks from './pages/react/reactHomeworks';
+import HomePage from './pages/HomePage';
+import SignUp from './pages/auth/SignUp';
+import SignIn from './pages/auth/SignIn';
+import JSHomeworks from './pages/js/JsHomeworks';
+import JSLessons from './pages/js/JsLessons';
+import ReactLessons from './pages/react/ReactLessons';
+import ReactHomeworks from './pages/react/ReactHomeworks';
 
 function App() {
     const theme = useSelector(state => state.theme.theme);

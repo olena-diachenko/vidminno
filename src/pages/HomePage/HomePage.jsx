@@ -22,7 +22,7 @@ import { useGetStudentsByGradeQuery } from '../../store/api/usersApi';
 import { useGetJsLessonsQuery } from '../../store/api/jsLessonsApi';
 import { useGetReactLessonsQuery } from '../../store/api/reactLessonsApi';
 import { useGetUsefulVideosQuery } from '../../store/api/usefulVideosApi';
-import SignUp from '../auth/signUp';
+import SignUp from '../auth/SignUp';
 import DefaultTemplate from '../../templates/defaultPage';
 import DashList from '../../components/DashList';
 import Slider from '../../components/Slider';
