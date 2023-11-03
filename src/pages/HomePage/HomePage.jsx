@@ -19,8 +19,8 @@ import { useSelector } from 'react-redux';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 import { useGetStudentsByGradeQuery } from '../../store/api/usersApi';
-import { useGetJsLessonsQuery } from '../../store/api/jsLessonsApi';
-import { useGetReactLessonsQuery } from '../../store/api/reactLessonsApi';
+import { useGetLimitJsLessonsQuery } from '../../store/api/jsApi';
+import { useGetLimitReactLessonsQuery } from '../../store/api/reactApi';
 import { useGetUsefulVideosQuery } from '../../store/api/usefulVideosApi';
 import SignUp from '../auth/SignUp';
 import DefaultTemplate from '../../templates/defaultPage';
@@ -36,12 +36,12 @@ import styles from './style.module.scss';
 const HomePage = () => {
     const user = useSelector(state => state.auth.user);
     const { data: users, isLoading } = useGetStudentsByGradeQuery();
-    const { data: jsLessons, isLoading: isLoad } = useGetJsLessonsQuery(5);
+    const { data: jsLessons, isLoading: isLoad } = useGetLimitJsLessonsQuery(5);
     const { data: reactLessons, isLoading: isLoadLessons } =
-        useGetReactLessonsQuery(5);
+        useGetLimitReactLessonsQuery(5);
     const { data: videos, isLoading: isLoadVideos } = useGetUsefulVideosQuery();
 
-    const donatData = {
+    const donutData = {
         labels: ['0-50 points', '50-75 points', '75-100 points'],
         datasets: [
             {
@@ -129,7 +129,7 @@ const HomePage = () => {
                                 className={styles.dashboard__chart}
                                 header="Scores"
                             >
-                                <Doughnut data={donatData} />
+                                <Doughnut data={donutData} />
                             </Panel>
                         </Col>
                         <Col sm={24} md={24} lg={16}>
@@ -170,7 +170,12 @@ const HomePage = () => {
                                         JS Course
                                     </Link>
                                 </h3>
-                                {!isLoad && <DashList lessons={jsLessons} />}
+                                {!isLoad && (
+                                    <DashList
+                                        lessons={jsLessons}
+                                        endpoint="/js-course/lessons"
+                                    />
+                                )}
                             </Panel>
                         </Col>
                     </Row>
@@ -197,7 +202,10 @@ const HomePage = () => {
                                     </Link>
                                 </h3>
                                 {!isLoadLessons && (
-                                    <DashList lessons={reactLessons} />
+                                    <DashList
+                                        lessons={reactLessons}
+                                        endpoint="/react-course/lessons"
+                                    />
                                 )}
                             </Panel>
                         </Col>

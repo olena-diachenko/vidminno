@@ -1,3 +1,3 @@
-import JSLessons from './JSLessons.jsx';
+import JsLessons from './JsLessons.jsx';
 
-export default JSLessons;
+export default JsLessons;

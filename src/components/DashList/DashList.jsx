@@ -1,10 +1,12 @@
 import React from 'react';
 import { List, FlexboxGrid } from 'rsuite';
-import FilmIcon from '@rsuite/icons/legacy/Film';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import getComplexity from '../../utils/complexity';
 
 const DashList = props => {
-    const data = props.lessons;
+    const { lessons } = props;
+    const { endpoint } = props;
 
     const styleCenter = {
         display: 'flex',
@@ -27,10 +29,9 @@ const DashList = props => {
     return (
         <>
             <FlexboxGrid>
-                <FlexboxGrid.Item
-                    colspan={2}
-                    style={styleCenter}
-                ></FlexboxGrid.Item>
+                <FlexboxGrid.Item colspan={2} style={styleCenter}>
+                    №
+                </FlexboxGrid.Item>
                 <FlexboxGrid.Item
                     colspan={6}
                     style={{
@@ -74,16 +75,11 @@ const DashList = props => {
                 ></FlexboxGrid.Item>
             </FlexboxGrid>
             <List hover>
-                {data.map((item, index) => (
+                {lessons.map((item, index) => (
                     <List.Item key={item.title} index={index + 1}>
                         <FlexboxGrid>
                             <FlexboxGrid.Item colspan={2} style={styleCenter}>
-                                {React.cloneElement(<FilmIcon />, {
-                                    style: {
-                                        color: 'darkgrey',
-                                        fontSize: '1.5em',
-                                    },
-                                })}
+                                {index + 1}
                             </FlexboxGrid.Item>
                             <FlexboxGrid.Item
                                 colspan={6}
@@ -104,7 +100,7 @@ const DashList = props => {
                             <FlexboxGrid.Item colspan={6} style={styleCenter}>
                                 <div style={{ textAlign: 'right' }}>
                                     <div style={dataStyle}>
-                                        {item.complexity}
+                                        {getComplexity(item.complexity)}
                                     </div>
                                 </div>
                             </FlexboxGrid.Item>
@@ -114,7 +110,9 @@ const DashList = props => {
                                     ...styleCenter,
                                 }}
                             >
-                                <a href="#">View</a>
+                                <Link to={`${endpoint}/${index + 1}`}>
+                                    View
+                                </Link>
                             </FlexboxGrid.Item>
                         </FlexboxGrid>
                     </List.Item>
