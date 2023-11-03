@@ -9,9 +9,13 @@ const authSlice = createSlice({
         setCredentials: (state, { payload }) => {
             state.user = payload;
         },
+
+        removeUser: state => {
+            state.user = null;
+        },
     },
 });
 
-export const { setCredentials } = authSlice.actions;
+export const { setCredentials, removeUser } = authSlice.actions;
 
 export default authSlice.reducer;

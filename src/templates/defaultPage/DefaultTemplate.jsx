@@ -30,6 +30,7 @@ import { MdOutlineLightMode } from 'react-icons/md';
 import { changeTheme } from '../../store/slices/theme';
 import admin from '../../utils/admin';
 import styles from './style.module.scss';
+import { removeUser } from '../../store/slices/auth';
 
 const DefaultTemplate = props => {
     const [expand, setExpand] = React.useState(true);
@@ -53,6 +54,11 @@ const DefaultTemplate = props => {
         const handleSelect = () => {
             options.onClose();
         };
+
+        const handleClick = () => {
+            dispatch(removeUser());
+        };
+
         return (
             <Popover
                 ref={ref}
@@ -67,7 +73,11 @@ const DefaultTemplate = props => {
                             {isAdmin === user ? 'Admin' : 'Student'}
                         </strong>
                         <Dropdown.Separator />
-                        <Link to="/sign-in" className={styles.popover__link}>
+                        <Link
+                            to="/sign-in"
+                            className={styles.popover__link}
+                            onClick={handleClick}
+                        >
                             Sign out
                         </Link>
                     </div>
@@ -197,10 +207,16 @@ const DefaultTemplate = props => {
                             />
                         </Stack>
                     </Header>
-                    <Content className={styles.content}>
+                    <Content
+                        className={styles.content}
+                        style={{ marginLeft: expand ? 260 : 56, marginTop: 56 }}
+                    >
                         {props.children}
                     </Content>
-                    <Footer className={styles.footer}>
+                    <Footer
+                        className={styles.footer}
+                        style={{ marginLeft: expand ? 260 : 56 }}
+                    >
                         Copyright &copy; V I D M I N N O,{' '}
                         {new Date().getFullYear()}
                     </Footer>
