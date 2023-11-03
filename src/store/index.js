@@ -14,14 +14,14 @@ import { usersApi } from './api/usersApi';
 import popUpReducer from './slices/popUp';
 import themeReducer from './slices/theme';
 import authReducer from './slices/auth';
-import { jsLessonsApi } from './api/jsLessonsApi';
-import { reactLessonsApi } from './api/reactLessonsApi';
+import { jsApi } from './api/jsApi';
+import { reactApi } from './api/reactApi';
 import { usefulVideosApi } from './api/usefulVideosApi';
 
 const rootReducer = combineReducers({
     [usersApi.reducerPath]: usersApi.reducer,
-    [jsLessonsApi.reducerPath]: jsLessonsApi.reducer,
-    [reactLessonsApi.reducerPath]: reactLessonsApi.reducer,
+    [jsApi.reducerPath]: jsApi.reducer,
+    [reactApi.reducerPath]: reactApi.reducer,
     [usefulVideosApi.reducerPath]: usefulVideosApi.reducer,
     popUp: popUpReducer,
     theme: themeReducer,
@@ -33,8 +33,8 @@ const persistConfig = {
     storage,
     blacklist: [
         usersApi.reducerPath,
-        jsLessonsApi.reducerPath,
-        reactLessonsApi.reducerPath,
+        jsApi.reducerPath,
+        reactApi.reducerPath,
         usefulVideosApi.reducerPath,
     ],
 };
@@ -58,8 +58,8 @@ const store = configureStore({
             },
         }).concat(
             usersApi.middleware,
-            jsLessonsApi.middleware,
-            reactLessonsApi.middleware,
+            jsApi.middleware,
+            reactApi.middleware,
             usefulVideosApi.middleware
         ),
 });
