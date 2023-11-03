@@ -3,6 +3,10 @@
 .sidebar {
   display: flex;
   flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
 
   &__navItem {
     width: 52px;
@@ -61,6 +65,11 @@
   align-items: center;
   justify-content: flex-end;
   padding: 0 12px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1;
 
   &__themeIcon {
     display: flex;
