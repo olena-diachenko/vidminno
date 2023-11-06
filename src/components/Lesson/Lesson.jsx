@@ -46,6 +46,13 @@ const Lesson = props => {
             </Panel>
             <Panel className={styles.panel} bordered shaded>
                 <p className={styles.panel__subtitle}>Additional material</p>
+                {addMaterial
+                    ? addMaterial.length === 0 && (
+                          <p className={styles.panel__noContent}>
+                              There is no additional material
+                          </p>
+                      )
+                    : null}
                 <List size="md" hover>
                     {addMaterial ? (
                         addMaterial.map((item, index) => (
@@ -67,6 +74,13 @@ const Lesson = props => {
             </Panel>
             <Panel className={styles.panel} bordered shaded>
                 <p className={styles.panel__subtitle}>Homeworks</p>
+                {homeworks
+                    ? homeworks.length === 0 && (
+                          <p className={styles.panel__noContent}>
+                              There are no homeworks
+                          </p>
+                      )
+                    : null}
                 <List size="md" hover>
                     {homeworks ? (
                         homeworks.map((item, index) => (
@@ -78,10 +92,13 @@ const Lesson = props => {
                                 </Link>
                                 <div className={styles.panel__hwContent}>
                                     <p>{`Deadline: ${item.deadline}`}</p>
-                                    <Progress.Line
-                                        percent={item.complexity}
-                                        strokeColor="#b0c8d1"
-                                    />
+                                    <div className={styles.panel__hwComplexity}>
+                                        <p>Complexity</p>
+                                        <Progress.Line
+                                            percent={item.complexity}
+                                            strokeColor="#b0c8d1"
+                                        />
+                                    </div>
                                     <Button
                                         className={styles.panel__hwButton}
                                         appearance="primary"

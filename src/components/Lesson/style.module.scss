@@ -35,6 +35,10 @@
     font-weight: bold;
   }
 
+  &__noContent {
+    padding: 10px 0;
+  }
+
   &__link {
     &:hover {
       text-decoration-line: none;
@@ -47,6 +51,11 @@
     align-items: center;
     gap: 20px;
     padding: 10px 0 0;
+  }
+
+  &__hwComplexity {
+    display: flex;
+    align-items: center;
   }
 
   &__hwButton {

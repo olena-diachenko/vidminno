@@ -135,8 +135,18 @@ const DefaultTemplate = props => {
                                     icon={<Icon as={FaJsSquare} />}
                                     placement="rightStart"
                                 >
-                                    <Nav.Item eventKey="2-1">Lessons</Nav.Item>
-                                    <Nav.Item eventKey="2-2">
+                                    <Nav.Item
+                                        eventKey="2-1"
+                                        as={NavLink}
+                                        href="/js-course/lessons"
+                                    >
+                                        Lessons
+                                    </Nav.Item>
+                                    <Nav.Item
+                                        eventKey="2-2"
+                                        as={NavLink}
+                                        href="/js-course/homeworks"
+                                    >
                                         Homeworks
                                     </Nav.Item>
                                 </Nav.Menu>
@@ -147,8 +157,18 @@ const DefaultTemplate = props => {
                                     icon={<Icon as={FaReact} />}
                                     placement="rightStart"
                                 >
-                                    <Nav.Item eventKey="3-1">Lessons</Nav.Item>
-                                    <Nav.Item eventKey="3-2">
+                                    <Nav.Item
+                                        eventKey="3-1"
+                                        as={NavLink}
+                                        href="/react-course/lessons"
+                                    >
+                                        Lessons
+                                    </Nav.Item>
+                                    <Nav.Item
+                                        eventKey="3-2"
+                                        as={NavLink}
+                                        href="/react-course/homeworks"
+                                    >
                                         Homeworks
                                     </Nav.Item>
                                 </Nav.Menu>
