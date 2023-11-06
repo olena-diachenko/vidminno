@@ -30,7 +30,7 @@ import { MdOutlineLightMode } from 'react-icons/md';
 import { changeTheme } from '../../store/slices/theme';
 import admin from '../../utils/admin';
 import styles from './style.module.scss';
-import { removeUser } from '../../store/slices/auth';
+import { logOut } from '../../store/slices/auth';
 
 const DefaultTemplate = props => {
     const [expand, setExpand] = React.useState(true);
@@ -56,7 +56,7 @@ const DefaultTemplate = props => {
         };
 
         const handleClick = () => {
-            dispatch(removeUser());
+            dispatch(logOut());
         };
 
         return (
