@@ -10,7 +10,7 @@ import {
     REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { usersApi } from './api/usersApi';
+import { vidminnoApi } from './api';
 import popUpReducer from './slices/popUp';
 import themeReducer from './slices/theme';
 import authReducer from './slices/auth';
@@ -19,10 +19,10 @@ import { reactApi } from './api/reactApi';
 import { usefulVideosApi } from './api/usefulVideosApi';
 
 const rootReducer = combineReducers({
-    [usersApi.reducerPath]: usersApi.reducer,
-    [jsApi.reducerPath]: jsApi.reducer,
-    [reactApi.reducerPath]: reactApi.reducer,
-    [usefulVideosApi.reducerPath]: usefulVideosApi.reducer,
+    [vidminnoApi.reducerPath]: vidminnoApi.reducer,
+    // [jsApi.reducerPath]: jsApi.reducer,
+    // [reactApi.reducerPath]: reactApi.reducer,
+    // [usefulVideosApi.reducerPath]: usefulVideosApi.reducer,
     popUp: popUpReducer,
     theme: themeReducer,
     auth: authReducer,
@@ -32,10 +32,10 @@ const persistConfig = {
     key: 'root',
     storage,
     blacklist: [
-        usersApi.reducerPath,
-        jsApi.reducerPath,
-        reactApi.reducerPath,
-        usefulVideosApi.reducerPath,
+        vidminnoApi.reducerPath,
+        // jsApi.reducerPath,
+        // reactApi.reducerPath,
+        // usefulVideosApi.reducerPath,
     ],
 };
 
@@ -57,10 +57,10 @@ const store = configureStore({
                 ],
             },
         }).concat(
-            usersApi.middleware,
-            jsApi.middleware,
-            reactApi.middleware,
-            usefulVideosApi.middleware
+            vidminnoApi.middleware
+            // jsApi.middleware,
+            // reactApi.middleware,
+            // usefulVideosApi.middleware
         ),
 });
 

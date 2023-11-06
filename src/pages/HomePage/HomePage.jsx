@@ -18,10 +18,12 @@ import InstagramIcon from '@rsuite/icons/legacy/Instagram';
 import { useSelector } from 'react-redux';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
-import { useGetStudentsByGradeQuery } from '../../store/api/usersApi';
-import { useGetLimitJsLessonsQuery } from '../../store/api/jsApi';
-import { useGetLimitReactLessonsQuery } from '../../store/api/reactApi';
-import { useGetUsefulVideosQuery } from '../../store/api/usefulVideosApi';
+import {
+    useGetStudentsByGradeQuery,
+    useGetUsefulVideosQuery,
+    useGetLimitJsLessonsQuery,
+    useGetLimitReactLessonsQuery,
+} from '../../store/api';
 import SignUp from '../auth/SignUp';
 import DefaultTemplate from '../../templates/defaultPage';
 import DashList from '../../components/DashList';

@@ -7,7 +7,7 @@ import {
     useGetJsLessonByIdQuery,
     useGetAddMaterialByJsLessonIdQuery,
     useGetJsHomeworksByLessonIdQuery,
-} from '../../../store/api/jsApi';
+} from '../../../store/api';
 
 const JsLesson = () => {
     const index = useParams().lessonId;
