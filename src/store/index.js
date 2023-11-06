@@ -11,13 +11,11 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { vidminnoApi } from './api';
-import popUpReducer from './slices/popUp';
 import themeReducer from './slices/theme';
 import authReducer from './slices/auth';
 
 const rootReducer = combineReducers({
     [vidminnoApi.reducerPath]: vidminnoApi.reducer,
-    popUp: popUpReducer,
     theme: themeReducer,
     auth: authReducer,
 });

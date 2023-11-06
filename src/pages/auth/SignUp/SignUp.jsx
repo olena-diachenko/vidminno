@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useRef } from 'react';
 import {
     Form,
     Button,
@@ -11,26 +11,23 @@ import {
 import EyeIcon from '@rsuite/icons/legacy/Eye';
 import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { useCreateUserMutation } from '../../../store/api';
 import PopUp from '../../../components/PopUp';
-import { openPopUp } from '../../../store/slices/popUp';
 
 const SignUp = () => {
-    const formRef = React.useRef();
-    const [visible, setVisible] = React.useState(false);
-    const [formValue, setFormValue] = React.useState({
+    const formRef = useRef();
+    const [modal, setModal] = useState(false);
+    const [visible, setVisible] = useState(false);
+    const [formValue, setFormValue] = useState({
         username: '',
         email: '',
         password: '',
     });
     const [createUser] = useCreateUserMutation();
-    const modal = useSelector(state => state.popUp.modal);
-    const dispatch = useDispatch();
 
     const handleSubmit = async e => {
         if (!formRef.current.check()) return;
-        dispatch(openPopUp());
+        setModal(!modal);
         await createUser(formValue);
     };
 
