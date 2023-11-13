@@ -57,6 +57,10 @@ export const vidminnoApi = createApi({
             query: id => `/js-lessons/${id}/homeworks`,
         }),
 
+        getReactLessons: builder.query({
+            query: () => '/react-lessons',
+        }),
+
         getLimitReactLessons: builder.query({
             query: limit => `/react-lessons?page=1&limit=${limit}`,
         }),
@@ -90,6 +94,7 @@ export const {
     useGetJsHomeworksQuery,
     useGetJsHomeworksByLessonIdQuery,
     useGetLimitReactLessonsQuery,
+    useGetReactLessonsQuery,
     useGetReactLessonByIdQuery,
     useGetAddMaterialByReactLessonIdQuery,
     useGetReactHomeworksQuery,
