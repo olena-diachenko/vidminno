@@ -87,7 +87,7 @@ const Lesson = props => {
                             <List.Item key={index} index={index}>
                                 <Link to="" className={styles.panel__link}>
                                     <h6 className={styles.panel__link}>
-                                        {`HW ${index + 1} - ${item.title}`}
+                                        {`HW ${item.id} - ${item.title}`}
                                     </h6>
                                 </Link>
                                 <div className={styles.panel__hwContent}>
