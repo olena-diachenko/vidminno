@@ -7,7 +7,7 @@ export const vidminnoApi = createApi({
         baseUrl: API_BASE_URL,
         headers: { 'content-type': 'application/json' },
     }),
-    tagTypes: ['Users'],
+    tagTypes: ['Users', 'UserHomework'],
     endpoints: builder => ({
         getStudentsByGrade: builder.query({
             query: () => `users?sortBy=averageGrade&order=desc`,
@@ -27,6 +27,10 @@ export const vidminnoApi = createApi({
                 body: JSON.stringify(user),
             }),
             invalidatesTags: [{ type: 'Users', id: 'Users' }],
+        }),
+
+        getUserByName: builder.query({
+            query: name => `users?search=${name}`,
         }),
 
         getUsefulVideos: builder.query({
@@ -55,6 +59,30 @@ export const vidminnoApi = createApi({
 
         getJsHomeworksByLessonId: builder.query({
             query: id => `/js-lessons/${id}/homeworks`,
+        }),
+
+        getJsHomeworksById: builder.query({
+            query: id => `/js-homeworks/${id}`,
+        }),
+
+        getJsHomeworksByUserId: builder.query({
+            query: id => `users/${id}/js-hw`,
+            providesTags: result =>
+                result
+                    ? [
+                          ...result.map(({ id }) => ({ type: 'Users', id })),
+                          { type: 'UserHomework', id: 'UserHomework' },
+                      ]
+                    : [{ type: 'UserHomework', id: 'UserHomework' }],
+        }),
+
+        saveJsHomeworkByUserId: builder.mutation({
+            query: arg => ({
+                url: `users/${arg.studentId}/js-hw`,
+                method: 'POST',
+                body: JSON.stringify(arg.hw),
+            }),
+            invalidatesTags: [{ type: 'UserHomework', id: 'UserHomework' }],
         }),
 
         getReactLessons: builder.query({
@@ -86,6 +114,7 @@ export const vidminnoApi = createApi({
 export const {
     useGetStudentsByGradeQuery,
     useCreateUserMutation,
+    useGetUserByNameQuery,
     useGetUsefulVideosQuery,
     useGetJsLessonsQuery,
     useGetLimitJsLessonsQuery,
@@ -93,6 +122,9 @@ export const {
     useGetAddMaterialByJsLessonIdQuery,
     useGetJsHomeworksQuery,
     useGetJsHomeworksByLessonIdQuery,
+    useGetJsHomeworksByIdQuery,
+    useGetJsHomeworksByUserIdQuery,
+    useSaveJsHomeworkByUserIdMutation,
     useGetLimitReactLessonsQuery,
     useGetReactLessonsQuery,
     useGetReactLessonByIdQuery,
