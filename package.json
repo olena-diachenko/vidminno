@@ -5,6 +5,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.6",
     "@rsuite/icons": "^1.0.3",
+    "@toast-ui/editor": "^3.2.2",
     "axios": "^1.5.1",
     "chart.js": "^4.4.0",
     "classnames": "^2.3.2",

@@ -1,28 +1,28 @@
-import { Badge, Button, Panel, PanelGroup } from 'rsuite';
+import { Badge, Button, Panel, PanelGroup, Progress } from 'rsuite';
 import PageNextIcon from '@rsuite/icons/PageNext';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
 
-const Lessons = props => {
-    const { lessons, homeworks, path, course } = props;
+const Homeworks = props => {
+    const { homeworks, path, course, userHomeworks } = props;
     const navigation = useNavigate();
     const redirectHandler = value => () => {
         navigation(`${path}${value}`);
     };
-    const getHomeworksCount = index =>
-        homeworks.filter(hw => hw.lessonId === String(index + 1)).length;
 
     return (
         <Panel bordered shaded>
-            <h3>{`${course} / Lessons`}</h3>
+            <h3>{`${course} / Homeworks`}</h3>
             <PanelGroup accordion defaultActiveKey={0}>
-                {lessons &&
-                    lessons.map((item, index) => (
+                {homeworks &&
+                    homeworks.map((item, index) => (
                         <Panel
                             className={styles.panel}
                             header={
-                                <h5>{`Lesson ${index + 1}. ${item.title}`}</h5>
+                                <h5>{`Homework ${index + 1}. ${
+                                    item.title
+                                }`}</h5>
                             }
                             eventKey={index}
                             key={index}
@@ -30,20 +30,30 @@ const Lessons = props => {
                             <div className={styles.panel__info}>
                                 <p
                                     className={styles.panel__date}
-                                >{`Date: ${item.date}`}</p>
+                                >{`Due by: ${item.deadline}`}</p>
                                 <Badge
                                     className={styles.panel__badge}
                                     content={
-                                        getHomeworksCount(index) === 0
-                                            ? 'No homeworks'
-                                            : `Homeworks: ${getHomeworksCount(
-                                                  index
-                                              )}`
+                                        userHomeworks &&
+                                        userHomeworks.some(
+                                            hw => hw.hwId === item.id
+                                        )
+                                            ? 'Completed'
+                                            : 'Not completed'
                                     }
                                     style={{
                                         background: '#ff6384',
                                         padding: 5,
                                     }}
+                                />
+                            </div>
+                            <div className={styles.panel__complexityWrap}>
+                                <p className={styles.panel__subtitle}>
+                                    <b>Complexity:</b>
+                                </p>
+                                <Progress.Line
+                                    percent={item.complexity}
+                                    strokeColor="#b0c8d1"
                                 />
                             </div>
                             <div className={styles.panel__desc}>
@@ -57,7 +67,7 @@ const Lessons = props => {
                                 endIcon={<PageNextIcon />}
                                 onClick={redirectHandler(index + 1)}
                             >
-                                To the lesson
+                                To the homework
                             </Button>
                         </Panel>
                     ))}
@@ -67,4 +77,4 @@ const Lessons = props => {
     );
 };
 
-export default Lessons;
+export default Homeworks;
