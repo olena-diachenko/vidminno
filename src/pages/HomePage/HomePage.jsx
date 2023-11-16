@@ -43,7 +43,7 @@ const HomePage = () => {
         useGetLimitReactLessonsQuery(5);
     const { data: videos, isLoading: isLoadVideos } = useGetUsefulVideosQuery();
 
-    const donutData = {
+    const doughnutData = {
         labels: ['0-50 points', '50-75 points', '75-100 points'],
         datasets: [
             {
@@ -131,7 +131,10 @@ const HomePage = () => {
                                 className={styles.dashboard__chart}
                                 header="Scores"
                             >
-                                <Doughnut data={donutData} />
+                                <Doughnut
+                                    data={doughnutData}
+                                    options={{ maintainAspectRatio: false }}
+                                />
                             </Panel>
                         </Col>
                         <Col sm={24} md={24} lg={16}>

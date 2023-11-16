@@ -1,5 +1,10 @@
 @import "src/assets/styles";
 
+canvas {
+  height: auto;
+  width: 691px;
+}
+
 .dashboard {
   &__socials {
     padding: 18px;
@@ -34,7 +39,6 @@
   }
 
   &__chart {
-    height: 430px;
     transition: all 0.3s ease;
     text-align: center;
     padding: 20px;
@@ -49,12 +53,6 @@
 
     &:hover {
       box-shadow: 5px 5px 5px $light-background-color;
-    }
-  }
-
-  @media screen and (max-width: $breakpoint-md) {
-    &__chart {
-      height: 380px;
     }
   }
 }
