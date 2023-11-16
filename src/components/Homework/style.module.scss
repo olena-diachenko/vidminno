@@ -1,0 +1,73 @@
+@import "src/assets/styles";
+
+.panel {
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 5px 5px 5px $light-background-color;
+  }
+
+  &__headingWrap {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    min-width: 120px;
+    background-color: $light-background-color!important;
+  }
+
+  &__infoWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 20px 10px 0;
+  }
+
+  &__complexityWrap {
+    display: flex;
+    align-items: center;
+    width: calc(100% / 3);
+  }
+
+  &__subtitle {
+    font-weight: bold;
+    font-size: larger;
+    margin-bottom: 20px;
+  }
+
+  &__date,
+  &__complexity {
+    font-weight: bolder;
+    color: grey;
+  }
+
+  &__buttonWrap {
+    margin-bottom: 30px;
+  }
+
+  &__linkWrap {
+    margin-bottom: 20px;
+  }
+
+  &__link {
+    font-weight: bolder;
+    font-size: larger;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      text-decoration-line: none;
+      opacity: 0.6;
+    }
+  }
+
+  &__hwInfo {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__markdownWrap {
+    margin-bottom: 20px;
+  }
+}
