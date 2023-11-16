@@ -7,7 +7,7 @@ export const vidminnoApi = createApi({
         baseUrl: API_BASE_URL,
         headers: { 'content-type': 'application/json' },
     }),
-    tagTypes: ['Users', 'UserHomework'],
+    tagTypes: ['Users', 'UserJsHomework', 'UserReactHomework'],
     endpoints: builder => ({
         getStudentsByGrade: builder.query({
             query: () => `users?sortBy=averageGrade&order=desc`,
@@ -70,10 +70,13 @@ export const vidminnoApi = createApi({
             providesTags: result =>
                 result
                     ? [
-                          ...result.map(({ id }) => ({ type: 'Users', id })),
-                          { type: 'UserHomework', id: 'UserHomework' },
+                          ...result.map(({ id }) => ({
+                              type: 'UserJsHomework',
+                              id,
+                          })),
+                          { type: 'UserJsHomework', id: 'UserJsHomework' },
                       ]
-                    : [{ type: 'UserHomework', id: 'UserHomework' }],
+                    : [{ type: 'UserJsHomework', id: 'UserJsHomework' }],
         }),
 
         saveJsHomeworkByUserId: builder.mutation({
@@ -82,7 +85,7 @@ export const vidminnoApi = createApi({
                 method: 'POST',
                 body: JSON.stringify(arg.hw),
             }),
-            invalidatesTags: [{ type: 'UserHomework', id: 'UserHomework' }],
+            invalidatesTags: [{ type: 'UserJsHomework', id: 'UserJsHomework' }],
         }),
 
         getReactLessons: builder.query({
@@ -105,8 +108,40 @@ export const vidminnoApi = createApi({
             query: () => `/react-homeworks`,
         }),
 
+        getReactHomeworksById: builder.query({
+            query: id => `/react-homeworks/${id}`,
+        }),
+
+        getReactHomeworksByUserId: builder.query({
+            query: id => `users/${id}/react-hw`,
+            providesTags: result =>
+                result
+                    ? [
+                          ...result.map(({ id }) => ({
+                              type: 'UserReactHomework',
+                              id,
+                          })),
+                          {
+                              type: 'UserReactHomework',
+                              id: 'UserReactHomework',
+                          },
+                      ]
+                    : [{ type: 'UserReactHomework', id: 'UserReactHomework' }],
+        }),
+
         getReactHomeworksByLessonId: builder.query({
             query: id => `/react-lessons/${id}/homeworks`,
+        }),
+
+        saveReactHomeworkByUserId: builder.mutation({
+            query: arg => ({
+                url: `users/${arg.studentId}/react-hw`,
+                method: 'POST',
+                body: JSON.stringify(arg.hw),
+            }),
+            invalidatesTags: [
+                { type: 'UserReactHomework', id: 'UserReactHomework' },
+            ],
         }),
     }),
 });
@@ -130,5 +165,8 @@ export const {
     useGetReactLessonByIdQuery,
     useGetAddMaterialByReactLessonIdQuery,
     useGetReactHomeworksQuery,
+    useGetReactHomeworksByIdQuery,
+    useGetReactHomeworksByUserIdQuery,
     useGetReactHomeworksByLessonIdQuery,
+    useSaveReactHomeworkByUserIdMutation,
 } = vidminnoApi;
