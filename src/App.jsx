@@ -13,6 +13,7 @@ import ReactHomeworks from './pages/react/ReactHomeworks';
 import ReactLesson from './pages/react/ReactLesson';
 import JsHomework from './pages/js/JsHomework';
 import ReactHomework from './pages/react/ReactHomework';
+import NoMatch from './pages/NoMatch';
 
 function App() {
     const theme = useSelector(state => state.theme.theme);
@@ -49,14 +50,7 @@ function App() {
                     path="/react-course/homeworks/:homeworkId"
                     element={<ReactHomework />}
                 />
-                <Route
-                    path="*"
-                    element={
-                        <main>
-                            <p>There is nothing here</p>
-                        </main>
-                    }
-                />
+                <Route path="*" element={<NoMatch />} />
             </Routes>
         </CustomProvider>
     );

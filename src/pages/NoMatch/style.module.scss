@@ -1,0 +1,12 @@
+@import "src/assets/styles";
+
+.noMatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+
+  &__img:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
