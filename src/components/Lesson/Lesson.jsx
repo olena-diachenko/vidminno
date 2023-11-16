@@ -2,16 +2,17 @@ import { Button, FlexboxGrid, Panel, List, Loader, Progress } from 'rsuite';
 import PagePreviousIcon from '@rsuite/icons/PagePrevious';
 import PageNextIcon from '@rsuite/icons/PageNext';
 import { Link, useNavigate } from 'react-router-dom';
-import React from 'react';
 import styles from './style.module.scss';
 
 const Lesson = props => {
     const navigation = useNavigate();
-    const { lesson } = props;
-    const { addMaterial } = props;
-    const { homeworks } = props;
+    const { lesson, addMaterial, homeworks, hwPath } = props;
 
     const backHandler = value => () => {
+        navigation(value);
+    };
+
+    const redirect = value => () => {
         navigation(value);
     };
 
@@ -85,7 +86,10 @@ const Lesson = props => {
                     {homeworks ? (
                         homeworks.map((item, index) => (
                             <List.Item key={index} index={index}>
-                                <Link to="" className={styles.panel__link}>
+                                <Link
+                                    to={`${hwPath}${item.id}`}
+                                    className={styles.panel__link}
+                                >
                                     <h6 className={styles.panel__link}>
                                         {`HW ${item.id} - ${item.title}`}
                                     </h6>
@@ -104,6 +108,9 @@ const Lesson = props => {
                                         appearance="primary"
                                         size="lg"
                                         endtIcon={<PageNextIcon />}
+                                        onClick={redirect(
+                                            `${hwPath}${item.id}`
+                                        )}
                                     >
                                         View
                                     </Button>

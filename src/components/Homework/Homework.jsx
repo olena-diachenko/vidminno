@@ -6,7 +6,8 @@ import MarkdownEditor from '../MarkdownEditor';
 
 const Homework = props => {
     const navigation = useNavigate();
-    const { user, homework, userHomeworks, studentId, saveHomework } = props;
+    const { user, homework, userHomeworks, studentId, saveHomework, path } =
+        props;
 
     const currentHomeworks =
         userHomeworks && userHomeworks.filter(hw => hw.hwId === homework.id);
@@ -55,9 +56,9 @@ const Homework = props => {
                 </div>
                 <div className={styles.panel__linkWrap}>
                     <Link
-                        to={`/js-course/lessons/${homework.jsLessonId}`}
+                        to={`${path}${homework.lessonId}`}
                         className={styles.panel__link}
-                    >{`Lesson ${homework.jsLessonId}`}</Link>
+                    >{`Lesson ${homework.lessonId}`}</Link>
                 </div>
                 <Divider />
                 <p className={styles.panel__descWrap}>{homework.description}</p>
