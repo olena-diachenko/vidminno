@@ -26,6 +26,7 @@ const ReactLesson = () => {
                     lesson={lesson}
                     addMaterial={!isLoad && addMaterials}
                     homeworks={!isLoadHomeworks && homeworks}
+                    hwPath="/react-course/homeworks/"
                 />
             )}
         </DefaultTemplate>
