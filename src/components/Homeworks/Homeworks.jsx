@@ -5,12 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
 
 const Homeworks = props => {
-    const { user, homeworks, path, course } = props;
+    const { homeworks, path, course, userHomeworks } = props;
     const navigation = useNavigate();
     const redirectHandler = value => () => {
         navigation(`${path}${value}`);
     };
-    const isComplete = hw => hw.some(item => item === user);
 
     return (
         <Panel bordered shaded>
@@ -35,9 +34,12 @@ const Homeworks = props => {
                                 <Badge
                                     className={styles.panel__badge}
                                     content={
-                                        isComplete(item.isDone) === true
+                                        userHomeworks &&
+                                        userHomeworks.some(
+                                            hw => hw.hwId === item.id
+                                        )
                                             ? 'Completed'
-                                            : 'Not submitted'
+                                            : 'Not completed'
                                     }
                                     style={{
                                         background: '#ff6384',
