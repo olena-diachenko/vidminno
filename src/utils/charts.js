@@ -26,6 +26,7 @@ export const options = {
             borderWidth: 1,
         },
     },
+    maintainAspectRatio: false,
     responsive: true,
     plugins: {
         legend: {
