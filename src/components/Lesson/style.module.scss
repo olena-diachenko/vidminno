@@ -1,0 +1,70 @@
+@import "src/assets/styles";
+
+.panel {
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 5px 5px 5px $light-background-color;
+  }
+
+  &__headingWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__heading {
+    margin-right: 20px;
+  }
+
+  &__button,
+  &__hwButton {
+    background-color: $light-background-color!important;
+  }
+
+  &__complexityWrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: calc(100% / 3);
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  &__noContent {
+    padding: 10px 0;
+  }
+
+  &__link {
+    &:hover {
+      text-decoration-line: none;
+    }
+  }
+
+  &__hwContent {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0 0;
+  }
+
+  &__hwComplexity {
+    display: flex;
+    align-items: center;
+  }
+
+  &__hwButton {
+    width: calc(100% / 3);
+    justify-self: end;
+  }
+
+  &__video {
+    height: 80dvh;
+    width: 100%;
+  }
+}

@@ -1,0 +1,31 @@
+@import "src/assets/styles";
+
+.panel {
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__date {
+    font-weight: bolder;
+    color: grey;
+    margin-right: 20px;
+  }
+
+  &__badge {
+    margin-right: 20px;
+    text-align: center;
+  }
+
+  &__desc {
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  &__button {
+    background-color: $light-background-color!important;
+  }
+}

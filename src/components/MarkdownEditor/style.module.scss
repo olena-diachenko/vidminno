@@ -1,0 +1,10 @@
+@import "src/assets/styles";
+
+.markdown {
+  margin-bottom: 20px;
+
+  &__button {
+    min-width: 120px;
+    background-color: $light-background-color!important;
+  }
+}
