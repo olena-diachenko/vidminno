@@ -100,7 +100,7 @@ const DefaultTemplate = props => {
                 >
                     <Sidenav.Header>
                         <div className={styles.brand}>
-                            <Link to="/" className={styles.brand__link}>
+                            <Link to="/vidminno" className={styles.brand__link}>
                                 {expand ? (
                                     <span className={styles.brand__open}>
                                         V I D M I N N O
@@ -124,7 +124,7 @@ const DefaultTemplate = props => {
                                     eventKey="1"
                                     icon={<DashboardIcon />}
                                     as={NavLink}
-                                    href="/"
+                                    href="/vidminno"
                                 >
                                     Dashboard
                                 </Nav.Item>

@@ -20,7 +20,7 @@ function App() {
     return (
         <CustomProvider theme={theme}>
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="vidminno" element={<HomePage />} />
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/js-course/lessons" element={<JsLessons />} />

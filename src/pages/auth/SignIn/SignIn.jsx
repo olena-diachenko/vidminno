@@ -33,7 +33,7 @@ const SignIn = () => {
     const handleSubmit = async e => {
         if (!formRef.current.check()) return;
         dispatch(setCredentials(formValue.username));
-        navigate('/');
+        navigate('/vidminno');
     };
 
     return (
