@@ -12,6 +12,7 @@ import ReactLessons from './pages/react/ReactLessons';
 import ReactHomeworks from './pages/react/ReactHomeworks';
 import ReactLesson from './pages/react/ReactLesson';
 import JsHomework from './pages/js/JsHomework';
+import ReactHomework from './pages/react/ReactHomework';
 
 function App() {
     const theme = useSelector(state => state.theme.theme);
@@ -43,6 +44,10 @@ function App() {
                 <Route
                     path="/react-course/homeworks"
                     element={<ReactHomeworks />}
+                />
+                <Route
+                    path="/react-course/homeworks/:homeworkId"
+                    element={<ReactHomework />}
                 />
                 <Route
                     path="*"
