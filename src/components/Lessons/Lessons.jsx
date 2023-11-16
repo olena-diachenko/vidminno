@@ -11,11 +11,7 @@ const Lessons = props => {
         navigation(`${path}${value}`);
     };
     const getHomeworksCount = index =>
-        homeworks.filter(hw =>
-            hw.jsLessonId
-                ? hw.jsLessonId === String(index + 1)
-                : hw.reactLessonId === String(index + 1)
-        ).length;
+        homeworks.filter(hw => hw.lessonId === String(index + 1)).length;
 
     return (
         <Panel bordered shaded>
