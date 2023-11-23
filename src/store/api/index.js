@@ -143,6 +143,10 @@ export const vidminnoApi = createApi({
                 { type: 'UserReactHomework', id: 'UserReactHomework' },
             ],
         }),
+
+        getTechArticles: builder.query({
+            query: () => '/technical-articles',
+        }),
     }),
 });
 
@@ -169,4 +173,5 @@ export const {
     useGetReactHomeworksByUserIdQuery,
     useGetReactHomeworksByLessonIdQuery,
     useSaveReactHomeworkByUserIdMutation,
+    useGetTechArticlesQuery,
 } = vidminnoApi;

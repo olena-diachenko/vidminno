@@ -13,6 +13,7 @@ import ReactHomeworks from './pages/react/ReactHomeworks';
 import ReactLesson from './pages/react/ReactLesson';
 import JsHomework from './pages/js/JsHomework';
 import ReactHomework from './pages/react/ReactHomework';
+import TechnicalArticles from './pages/TechnicalArticles';
 import NoMatch from './pages/NoMatch';
 
 function App() {
@@ -49,6 +50,10 @@ function App() {
                 <Route
                     path="/react-course/homeworks/:homeworkId"
                     element={<ReactHomework />}
+                />
+                <Route
+                    path="/technical-articles"
+                    element={<TechnicalArticles />}
                 />
                 <Route path="*" element={<NoMatch />} />
             </Routes>
