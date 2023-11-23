@@ -31,9 +31,10 @@ import { changeTheme } from '../../store/slices/theme';
 import admin from '../../utils/admin';
 import styles from './style.module.scss';
 import { logOut } from '../../store/slices/auth';
+import { setExpand } from '../../store/slices/navMenu';
 
 const DefaultTemplate = props => {
-    const [expand, setExpand] = React.useState(true);
+    const expand = useSelector(state => state.navMenu.expand);
     const trigger = React.useRef();
     const user = useSelector(state => state.auth.user);
     const theme = useSelector(state => state.theme.theme);
@@ -87,7 +88,7 @@ const DefaultTemplate = props => {
     };
 
     const expandHandler = () => {
-        setExpand(!expand);
+        dispatch(setExpand());
     };
 
     return (
@@ -175,6 +176,7 @@ const DefaultTemplate = props => {
                                 <Nav.Item
                                     eventKey="4"
                                     icon={<Icon as={FaRegNewspaper} />}
+                                    href="/technical-articles"
                                 >
                                     Technical articles
                                 </Nav.Item>
