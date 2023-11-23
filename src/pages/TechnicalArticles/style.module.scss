@@ -29,6 +29,10 @@
     background-color: $light-background-color!important;
   }
 
+  &__button:not(:last-child) {
+    border-right: 1px solid white;
+  }
+
   &__group {
     margin-right: 30px;
   }

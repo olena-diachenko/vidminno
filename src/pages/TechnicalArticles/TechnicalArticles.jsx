@@ -1,12 +1,15 @@
 import {
     Badge,
     Button,
+    ButtonToolbar,
+    ButtonGroup,
     RadioTile,
     RadioTileGroup,
     Loader,
     Panel,
     PanelGroup,
     Divider,
+    IconButton,
 } from 'rsuite';
 import PageNextIcon from '@rsuite/icons/PageNext';
 import React from 'react';
@@ -74,26 +77,53 @@ const TechnicalArticles = () => {
                                         <p
                                             className={styles.panel__date}
                                         >{`Created: ${item.created}`}</p>
-                                        {item.category && (
-                                            <Badge
-                                                className={styles.panel__badge}
-                                                content={item.category}
-                                                style={{
-                                                    background: '#ff6384',
-                                                    padding: 5,
-                                                }}
-                                            />
-                                        )}
+                                        <div>
+                                            {item.categories !== 0 &&
+                                                item.categories.map(
+                                                    (category, ind) => (
+                                                        <Badge
+                                                            className={
+                                                                styles.panel__badge
+                                                            }
+                                                            content={category}
+                                                            style={{
+                                                                background:
+                                                                    '#ff6384',
+                                                                padding: 5,
+                                                            }}
+                                                            key={ind}
+                                                        />
+                                                    )
+                                                )}
+                                        </div>
                                     </div>
-                                    <Button
-                                        className={styles.panel__button}
-                                        appearance="primary"
-                                        size="md"
-                                        endIcon={<PageNextIcon />}
-                                        onClick={redirectHandler(index + 1)}
-                                    >
-                                        Read
-                                    </Button>
+                                    <ButtonToolbar>
+                                        <ButtonGroup>
+                                            <IconButton
+                                                className={styles.panel__button}
+                                                size="md"
+                                                icon={
+                                                    <Icon
+                                                        as={FaHeart}
+                                                        style={{
+                                                            color: 'white',
+                                                        }}
+                                                    />
+                                                }
+                                            />
+                                            <Button
+                                                className={styles.panel__button}
+                                                appearance="primary"
+                                                size="md"
+                                                endIcon={<PageNextIcon />}
+                                                onClick={redirectHandler(
+                                                    index + 1
+                                                )}
+                                            >
+                                                Read
+                                            </Button>
+                                        </ButtonGroup>
+                                    </ButtonToolbar>
                                 </Panel>
                             ))}
                         </PanelGroup>
