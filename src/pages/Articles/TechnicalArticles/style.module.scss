@@ -14,6 +14,11 @@
     margin-bottom: 20px;
   }
 
+  &__btnGroup {
+    display: flex;
+    gap: 20px;
+  }
+
   &__date {
     font-weight: bolder;
     color: grey;
@@ -27,6 +32,10 @@
 
   &__button {
     background-color: $light-background-color!important;
+  }
+
+  &__viewButton {
+    background-color: $second-light-background-color!important;
   }
 
   &__button:not(:last-child) {
@@ -53,3 +62,4 @@
     width: 20px;
   }
 }
+
