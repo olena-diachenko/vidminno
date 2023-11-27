@@ -13,8 +13,9 @@ import ReactHomeworks from './pages/react/ReactHomeworks';
 import ReactLesson from './pages/react/ReactLesson';
 import JsHomework from './pages/js/JsHomework';
 import ReactHomework from './pages/react/ReactHomework';
-import TechnicalArticles from './pages/TechnicalArticles';
+import TechnicalArticles from './pages/Articles/TechnicalArticles';
 import NoMatch from './pages/NoMatch';
+import TechnicalArticle from './pages/Articles/TechnicalArticle';
 
 function App() {
     const theme = useSelector(state => state.theme.theme);
@@ -54,6 +55,10 @@ function App() {
                 <Route
                     path="/technical-articles"
                     element={<TechnicalArticles />}
+                />
+                <Route
+                    path="/technical-articles/:articleId"
+                    element={<TechnicalArticle />}
                 />
                 <Route path="*" element={<NoMatch />} />
             </Routes>
