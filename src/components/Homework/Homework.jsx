@@ -63,7 +63,7 @@ const Homework = props => {
                     >{`Lesson ${homework.lessonId}`}</Link>
                 </div>
                 <Divider />
-                <p className={styles.panel__descWrap}>{homework.description}</p>
+                <p>{homework.description}</p>
             </Panel>
             <FlexboxGrid justify="center" className={styles.panel__buttonWrap}>
                 <Button
