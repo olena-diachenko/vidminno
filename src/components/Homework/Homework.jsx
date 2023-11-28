@@ -2,6 +2,7 @@ import { Button, FlexboxGrid, Panel, Progress, Divider } from 'rsuite';
 import PagePreviousIcon from '@rsuite/icons/PagePrevious';
 import { Link, useNavigate } from 'react-router-dom';
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import styles from './style.module.scss';
 import MarkdownEditor from '../MarkdownEditor';
 
@@ -85,7 +86,7 @@ const Homework = props => {
                                     className={styles.panel__date}
                                 >{`Uploaded: ${item.uploadDate}`}</p>
                             </div>
-                            <p>{item.body}</p>
+                            <ReactMarkdown>{item.body}</ReactMarkdown>
                             <Divider />
                         </React.Fragment>
                     ))}
