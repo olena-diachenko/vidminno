@@ -22,4 +22,13 @@
   &__categories {
     color: #607d8b;
   }
+
+  &__buttonWrap {
+    margin-bottom: 30px;
+  }
+
+  &__button {
+    min-width: 120px;
+    background-color: $light-background-color!important;
+  }
 }

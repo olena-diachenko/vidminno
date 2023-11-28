@@ -1,29 +1,51 @@
-import { Divider, Panel } from 'rsuite';
+import { Button, Divider, FlexboxGrid, Panel } from 'rsuite';
 import React from 'react';
+import PagePreviousIcon from '@rsuite/icons/PagePrevious';
+import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
 
 const Article = props => {
     const { article } = props;
+    const navigation = useNavigate();
+
+    const backHandler = value => () => {
+        navigation(value);
+    };
 
     return (
-        <Panel className={styles.panel} bordered shaded>
-            <div className={styles.panel__headingWrap}>
-                <h3 className={styles.panel__heading}>{`${article.title}`}</h3>
-            </div>
-            <p
-                className={styles.panel__date}
-            >{`Created: ${article.created}`}</p>
-            <p className={styles.panel__date}>
-                {`Categories: `}
-                {article.categories.map(category => (
-                    <span
-                        className={styles.panel__categories}
-                    >{`${category} `}</span>
-                ))}
-            </p>
-            <Divider />
-            <p className={styles.panel__descWrap}>{article.content}</p>
-        </Panel>
+        <>
+            <Panel className={styles.panel} bordered shaded>
+                <div className={styles.panel__headingWrap}>
+                    <h3
+                        className={styles.panel__heading}
+                    >{`${article.title}`}</h3>
+                </div>
+                <p
+                    className={styles.panel__date}
+                >{`Created: ${article.created}`}</p>
+                <p className={styles.panel__date}>
+                    {`Categories: `}
+                    {article.categories.map(category => (
+                        <span
+                            className={styles.panel__categories}
+                        >{`${category} `}</span>
+                    ))}
+                </p>
+                <Divider />
+                <p>{article.content}</p>
+            </Panel>
+            <FlexboxGrid justify="center" className={styles.panel__buttonWrap}>
+                <Button
+                    className={styles.panel__button}
+                    appearance="primary"
+                    size="lg"
+                    startIcon={<PagePreviousIcon />}
+                    onClick={backHandler(-1)}
+                >
+                    Go back
+                </Button>
+            </FlexboxGrid>
+        </>
     );
 };
 
