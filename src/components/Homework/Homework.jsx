@@ -3,6 +3,7 @@ import PagePreviousIcon from '@rsuite/icons/PagePrevious';
 import { Link, useNavigate } from 'react-router-dom';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import PropTypes from 'prop-types';
 import styles from './style.module.scss';
 import MarkdownEditor from '../MarkdownEditor';
 
@@ -100,6 +101,15 @@ const Homework = props => {
             </Panel>
         </>
     );
+};
+
+Homework.propTypes = {
+    user: PropTypes.string,
+    homework: PropTypes.object,
+    userHomeworks: PropTypes.array,
+    studentId: PropTypes.string,
+    saveHomework: PropTypes.func,
+    path: PropTypes.string,
 };
 
 export default Homework;

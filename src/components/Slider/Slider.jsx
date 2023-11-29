@@ -1,5 +1,6 @@
 import React from 'react';
 import { Carousel } from 'rsuite';
+import PropTypes from 'prop-types';
 
 const Slider = props => {
     const data = props.videos;
@@ -17,6 +18,10 @@ const Slider = props => {
             ))}
         </Carousel>
     );
+};
+
+Slider.propTypes = {
+    videos: PropTypes.array,
 };
 
 export default Slider;

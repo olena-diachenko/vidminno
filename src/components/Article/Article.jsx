@@ -2,6 +2,7 @@ import { Button, Divider, FlexboxGrid, Panel } from 'rsuite';
 import React from 'react';
 import PagePreviousIcon from '@rsuite/icons/PagePrevious';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styles from './style.module.scss';
 
 const Article = props => {
@@ -25,8 +26,9 @@ const Article = props => {
                 >{`Created: ${article.created}`}</p>
                 <p className={styles.panel__date}>
                     {`Categories: `}
-                    {article.categories.map(category => (
+                    {article.categories.map((category, ind) => (
                         <span
+                            key={ind}
                             className={styles.panel__categories}
                         >{`${category} `}</span>
                     ))}
@@ -47,6 +49,10 @@ const Article = props => {
             </FlexboxGrid>
         </>
     );
+};
+
+Article.propTypes = {
+    article: PropTypes.object,
 };
 
 export default Article;

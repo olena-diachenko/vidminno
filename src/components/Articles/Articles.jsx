@@ -26,6 +26,7 @@ import {
 } from 'react-icons/fa';
 import TagNumberIcon from '@rsuite/icons/TagNumber';
 import VisibleIcon from '@rsuite/icons/Visible';
+import PropTypes from 'prop-types';
 import pageTitle from '../../utils/articleCategories';
 import styles from './style.module.scss';
 
@@ -415,6 +416,14 @@ const Articles = props => {
             </div>
         </Panel>
     );
+};
+
+Articles.propTypes = {
+    articles: PropTypes.array,
+    favoriteArticles: PropTypes.array,
+    path: PropTypes.string,
+    category: PropTypes.string,
+    toggleFavorites: PropTypes.func,
 };
 
 export default Articles;
