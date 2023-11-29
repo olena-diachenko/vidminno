@@ -2,6 +2,7 @@ import { Button, FlexboxGrid, Panel, List, Loader, Progress } from 'rsuite';
 import PagePreviousIcon from '@rsuite/icons/PagePrevious';
 import PageNextIcon from '@rsuite/icons/PageNext';
 import { Link, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styles from './style.module.scss';
 
 const Lesson = props => {
@@ -145,6 +146,13 @@ const Lesson = props => {
             </FlexboxGrid>
         </>
     );
+};
+
+Lesson.propTypes = {
+    lesson: PropTypes.object,
+    addMaterial: PropTypes.array,
+    homeworks: PropTypes.array,
+    hwPath: PropTypes.string,
 };
 
 export default Lesson;

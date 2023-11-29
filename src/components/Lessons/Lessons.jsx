@@ -2,6 +2,7 @@ import { Badge, Button, Panel, PanelGroup } from 'rsuite';
 import PageNextIcon from '@rsuite/icons/PageNext';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styles from './style.module.scss';
 
 const Lessons = props => {
@@ -65,6 +66,13 @@ const Lessons = props => {
             }
         </Panel>
     );
+};
+
+Lessons.propTypes = {
+    lessons: PropTypes.array,
+    homeworks: PropTypes.array,
+    path: PropTypes.string,
+    course: PropTypes.string,
 };
 
 export default Lessons;

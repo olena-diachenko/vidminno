@@ -4,6 +4,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
 import { Button } from 'rsuite';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import styles from './style.module.scss';
 
 const MarkdownEditor = props => {
@@ -47,6 +48,10 @@ const MarkdownEditor = props => {
             </Button>
         </>
     );
+};
+
+MarkdownEditor.propTypes = {
+    onSend: PropTypes.func,
 };
 
 export default MarkdownEditor;

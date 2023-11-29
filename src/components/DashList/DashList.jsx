@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 import getComplexity from '../../utils/complexity';
 
 const DashList = props => {
-    const { lessons } = props;
-    const { endpoint } = props;
+    const { lessons, endpoint } = props;
 
     const styleCenter = {
         display: 'flex',
@@ -124,12 +123,6 @@ const DashList = props => {
 
 DashList.propTypes = {
     lessons: PropTypes.array,
-};
-
-DashList.defaultProps = {
-    lessons: [
-        { title: 'Lesson', date: 'Date', complexity: 'There is no info' },
-    ],
 };
 
 export default DashList;
