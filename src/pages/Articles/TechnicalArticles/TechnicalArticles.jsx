@@ -1,12 +1,19 @@
 import { Loader } from 'rsuite';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import DefaultTemplate from '../../../templates/defaultPage';
-import { useGetTechArticlesQuery } from '../../../store/api';
+import {
+    useGetTechArticlesByCategoryQuery,
+    useGetTechArticlesQuery,
+} from '../../../store/api';
 import Articles from '../../../components/Articles';
 
 const TechnicalArticles = () => {
-    const { data: articles, isLoading } = useGetTechArticlesQuery();
+    const artCategory = useParams().articleCategory;
+    const { data: articles, isLoading } =
+        useGetTechArticlesByCategoryQuery(artCategory);
+    const { data: allArticles, isLoading: isLoad } = useGetTechArticlesQuery();
     const theme = useSelector(state => state.theme.theme);
 
     const TSIcon = React.forwardRef((props, ref) => (
@@ -29,8 +36,13 @@ const TechnicalArticles = () => {
                 <Loader size="lg" />
             ) : (
                 <Articles
-                    articles={articles}
-                    path={'/technical-articles/'}
+                    articles={
+                        articles.length === 0
+                            ? !isLoad && allArticles
+                            : articles
+                    }
+                    path={`/technical-articles/`}
+                    category={artCategory}
                     icon={TSIcon}
                 />
             )}

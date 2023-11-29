@@ -28,16 +28,16 @@ import VisibleIcon from '@rsuite/icons/Visible';
 import styles from './style.module.scss';
 
 const Articles = props => {
-    const { articles, path, icon } = props;
+    const { articles, path, category, icon } = props;
 
     const navigation = useNavigate();
 
     const redirectHandler = value => () => {
-        navigation(`${path}${value}`);
+        navigation(`${path}${category}/${value}`);
     };
 
     const clickHandler = e => {
-        console.log(e);
+        navigation(`${path}${e}`);
     };
 
     return (
@@ -49,91 +49,99 @@ const Articles = props => {
                     accordion
                     defaultActiveKey={0}
                 >
-                    {articles.map((item, index) => (
-                        <Panel
-                            className={styles.panel}
-                            header={<h5>{item.title}</h5>}
-                            eventKey={index}
-                            key={index}
-                        >
-                            <div className={styles.panel__info}>
-                                <p
-                                    className={styles.panel__date}
-                                >{`Created: ${item.created}`}</p>
-                                <div>
-                                    {item.categories !== 0 &&
-                                        item.categories.map((category, ind) => (
-                                            <Badge
-                                                className={styles.panel__badge}
-                                                content={category}
-                                                style={{
-                                                    background: '#ff6384',
-                                                    padding: 5,
-                                                }}
-                                                key={ind}
-                                            />
-                                        ))}
+                    {articles &&
+                        articles.map((item, index) => (
+                            <Panel
+                                className={styles.panel}
+                                header={<h5>{item.title}</h5>}
+                                eventKey={index}
+                                key={index}
+                            >
+                                <div className={styles.panel__info}>
+                                    <p
+                                        className={styles.panel__date}
+                                    >{`Created: ${item.created}`}</p>
+                                    <div>
+                                        {item.categories !== 0 &&
+                                            item.categories.map(
+                                                (itemCategory, ind) => (
+                                                    <Badge
+                                                        className={
+                                                            styles.panel__badge
+                                                        }
+                                                        content={itemCategory}
+                                                        style={{
+                                                            background:
+                                                                '#ff6384',
+                                                            padding: 5,
+                                                        }}
+                                                        key={ind}
+                                                    />
+                                                )
+                                            )}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className={styles.panel__btnGroup}>
-                                <ButtonToolbar>
-                                    <ButtonGroup>
-                                        <IconButton
-                                            className={styles.panel__button}
-                                            size="md"
-                                            icon={
-                                                <Icon
-                                                    as={FaHeart}
-                                                    style={{
-                                                        color: 'white',
-                                                    }}
-                                                />
-                                            }
-                                        />
-                                        <Button
-                                            className={styles.panel__button}
-                                            appearance="primary"
-                                            size="md"
-                                            endIcon={<PageNextIcon />}
-                                            onClick={redirectHandler(index + 1)}
-                                        >
-                                            Read
-                                        </Button>
-                                    </ButtonGroup>
-                                </ButtonToolbar>
-                                <div>
+                                <div className={styles.panel__btnGroup}>
                                     <ButtonToolbar>
                                         <ButtonGroup>
                                             <IconButton
-                                                className={
-                                                    styles.panel__viewButton
-                                                }
+                                                className={styles.panel__button}
                                                 size="md"
                                                 icon={
                                                     <Icon
-                                                        as={VisibleIcon}
+                                                        as={FaHeart}
                                                         style={{
                                                             color: 'white',
                                                         }}
-                                                        className={
-                                                            styles.panel__viewButton
-                                                        }
                                                     />
                                                 }
-                                                style={{
-                                                    color: 'white',
-                                                    paddingLeft: 40,
-                                                }}
-                                                disabled
+                                            />
+                                            <Button
+                                                className={styles.panel__button}
+                                                appearance="primary"
+                                                size="md"
+                                                endIcon={<PageNextIcon />}
+                                                onClick={redirectHandler(
+                                                    item.id
+                                                )}
                                             >
-                                                Views
-                                            </IconButton>
+                                                Read
+                                            </Button>
                                         </ButtonGroup>
                                     </ButtonToolbar>
+                                    <div>
+                                        <ButtonToolbar>
+                                            <ButtonGroup>
+                                                <IconButton
+                                                    className={
+                                                        styles.panel__viewButton
+                                                    }
+                                                    size="md"
+                                                    icon={
+                                                        <Icon
+                                                            as={VisibleIcon}
+                                                            style={{
+                                                                color: 'white',
+                                                            }}
+                                                            className={
+                                                                styles.panel__viewButton
+                                                            }
+                                                        />
+                                                    }
+                                                    style={{
+                                                        color: 'white',
+                                                        paddingLeft: 40,
+                                                    }}
+                                                    disabled
+                                                >
+                                                    Views
+                                                </IconButton>
+                                            </ButtonGroup>
+                                        </ButtonToolbar>
+                                    </div>
                                 </div>
-                            </div>
-                        </Panel>
-                    ))}
+                            </Panel>
+                        ))}
                 </PanelGroup>
                 <Panel
                     className={styles.panel__categories}
@@ -141,7 +149,7 @@ const Articles = props => {
                     bordered
                 >
                     <RadioTileGroup
-                        defaultValue="all-articles"
+                        defaultValue={`${category}`}
                         aria-label="Visibility Level"
                         className={styles.panel__radioWrap}
                         onChange={clickHandler}
