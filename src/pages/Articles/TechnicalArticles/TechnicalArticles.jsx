@@ -6,6 +6,7 @@ import DefaultTemplate from '../../../templates/defaultPage';
 import {
     useGetTechArticlesByCategoryQuery,
     useGetTechArticlesQuery,
+    useGetFavoriteTechArticlesQuery,
 } from '../../../store/api';
 import Articles from '../../../components/Articles';
 
@@ -14,6 +15,8 @@ const TechnicalArticles = () => {
     const { data: articles, isLoading } =
         useGetTechArticlesByCategoryQuery(artCategory);
     const { data: allArticles, isLoading: isLoad } = useGetTechArticlesQuery();
+    const { data: favoriteArticles, isLoading: isLoadFavArt } =
+        useGetFavoriteTechArticlesQuery();
     const theme = useSelector(state => state.theme.theme);
 
     const TSIcon = React.forwardRef((props, ref) => (
@@ -41,6 +44,7 @@ const TechnicalArticles = () => {
                             ? !isLoad && allArticles
                             : articles
                     }
+                    favoriteArticles={!isLoadFavArt && favoriteArticles}
                     path={`/technical-articles/`}
                     category={artCategory}
                     icon={TSIcon}

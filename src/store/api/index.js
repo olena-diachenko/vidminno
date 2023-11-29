@@ -155,6 +155,10 @@ export const vidminnoApi = createApi({
         getTechArticlesByCategory: builder.query({
             query: category => `/technical-articles?filter=${category}`,
         }),
+
+        getFavoriteTechArticles: builder.query({
+            query: () => `/technical-articles?filter=true`,
+        }),
     }),
 });
 
@@ -184,4 +188,5 @@ export const {
     useGetTechArticlesQuery,
     useGetTechArticlesByIdQuery,
     useGetTechArticlesByCategoryQuery,
+    useGetFavoriteTechArticlesQuery,
 } = vidminnoApi;

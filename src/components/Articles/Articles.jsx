@@ -25,10 +25,11 @@ import {
 } from 'react-icons/fa';
 import TagNumberIcon from '@rsuite/icons/TagNumber';
 import VisibleIcon from '@rsuite/icons/Visible';
+import pageTitle from '../../utils/articleCategories';
 import styles from './style.module.scss';
 
 const Articles = props => {
-    const { articles, path, category, icon } = props;
+    const { articles, favoriteArticles, path, category, icon } = props;
 
     const navigation = useNavigate();
 
@@ -40,9 +41,15 @@ const Articles = props => {
         navigation(`${path}${e}`);
     };
 
+    const toggleFavoriteHandler = () => {};
+
     return (
         <Panel bordered shaded>
-            <h3>{'Articles'}</h3>
+            <h3>
+                {pageTitle[category] === undefined
+                    ? 'Articles'
+                    : `Articles / ${pageTitle[category]}`}
+            </h3>
             <div className={styles.panel__wrap}>
                 <PanelGroup
                     className={styles.panel__group}
@@ -50,98 +57,213 @@ const Articles = props => {
                     defaultActiveKey={0}
                 >
                     {articles &&
-                        articles.map((item, index) => (
-                            <Panel
-                                className={styles.panel}
-                                header={<h5>{item.title}</h5>}
-                                eventKey={index}
-                                key={index}
-                            >
-                                <div className={styles.panel__info}>
-                                    <p
-                                        className={styles.panel__date}
-                                    >{`Created: ${item.created}`}</p>
-                                    <div>
-                                        {item.categories !== 0 &&
-                                            item.categories.map(
-                                                (itemCategory, ind) => (
-                                                    <Badge
-                                                        className={
-                                                            styles.panel__badge
-                                                        }
-                                                        content={itemCategory}
-                                                        style={{
-                                                            background:
-                                                                '#ff6384',
-                                                            padding: 5,
-                                                        }}
-                                                        key={ind}
-                                                    />
-                                                )
-                                            )}
-                                    </div>
-                                </div>
-                                <div className={styles.panel__btnGroup}>
-                                    <ButtonToolbar>
-                                        <ButtonGroup>
-                                            <IconButton
-                                                className={styles.panel__button}
-                                                size="md"
-                                                icon={
-                                                    <Icon
-                                                        as={FaHeart}
-                                                        style={{
-                                                            color: 'white',
-                                                        }}
-                                                    />
-                                                }
-                                            />
-                                            <Button
-                                                className={styles.panel__button}
-                                                appearance="primary"
-                                                size="md"
-                                                endIcon={<PageNextIcon />}
-                                                onClick={redirectHandler(
-                                                    item.id
-                                                )}
-                                            >
-                                                Read
-                                            </Button>
-                                        </ButtonGroup>
-                                    </ButtonToolbar>
-                                    <div>
-                                        <ButtonToolbar>
-                                            <ButtonGroup>
-                                                <IconButton
-                                                    className={
-                                                        styles.panel__viewButton
-                                                    }
-                                                    size="md"
-                                                    icon={
-                                                        <Icon
-                                                            as={VisibleIcon}
-                                                            style={{
-                                                                color: 'white',
-                                                            }}
-                                                            className={
-                                                                styles.panel__viewButton
-                                                            }
-                                                        />
-                                                    }
-                                                    style={{
-                                                        color: 'white',
-                                                        paddingLeft: 40,
-                                                    }}
-                                                    disabled
-                                                >
-                                                    Views
-                                                </IconButton>
-                                            </ButtonGroup>
-                                        </ButtonToolbar>
-                                    </div>
-                                </div>
-                            </Panel>
-                        ))}
+                        (category !== 'favorites'
+                            ? articles.map((item, index) => (
+                                  <Panel
+                                      className={styles.panel}
+                                      header={<h5>{item.title}</h5>}
+                                      eventKey={index}
+                                      key={index}
+                                  >
+                                      <div className={styles.panel__info}>
+                                          <p
+                                              className={styles.panel__date}
+                                          >{`Created: ${item.created}`}</p>
+                                          <div>
+                                              {item.categories !== 0 &&
+                                                  item.categories.map(
+                                                      (itemCategory, ind) => (
+                                                          <Badge
+                                                              className={
+                                                                  styles.panel__badge
+                                                              }
+                                                              content={
+                                                                  itemCategory
+                                                              }
+                                                              style={{
+                                                                  background:
+                                                                      '#ff6384',
+                                                                  padding: 5,
+                                                              }}
+                                                              key={ind}
+                                                          />
+                                                      )
+                                                  )}
+                                          </div>
+                                      </div>
+                                      <div className={styles.panel__btnGroup}>
+                                          <ButtonToolbar>
+                                              <ButtonGroup>
+                                                  <IconButton
+                                                      className={
+                                                          styles.panel__button
+                                                      }
+                                                      size="md"
+                                                      icon={
+                                                          <Icon
+                                                              as={FaHeart}
+                                                              style={{
+                                                                  color: 'white',
+                                                              }}
+                                                          />
+                                                      }
+                                                      onClick={
+                                                          toggleFavoriteHandler
+                                                      }
+                                                  />
+                                                  <Button
+                                                      className={
+                                                          styles.panel__button
+                                                      }
+                                                      appearance="primary"
+                                                      size="md"
+                                                      endIcon={<PageNextIcon />}
+                                                      onClick={redirectHandler(
+                                                          item.id
+                                                      )}
+                                                  >
+                                                      Read
+                                                  </Button>
+                                              </ButtonGroup>
+                                          </ButtonToolbar>
+                                          <div>
+                                              <ButtonToolbar>
+                                                  <ButtonGroup>
+                                                      <IconButton
+                                                          className={
+                                                              styles.panel__viewButton
+                                                          }
+                                                          size="md"
+                                                          icon={
+                                                              <Icon
+                                                                  as={
+                                                                      VisibleIcon
+                                                                  }
+                                                                  style={{
+                                                                      color: 'white',
+                                                                  }}
+                                                                  className={
+                                                                      styles.panel__viewButton
+                                                                  }
+                                                              />
+                                                          }
+                                                          style={{
+                                                              color: 'white',
+                                                              paddingLeft: 40,
+                                                          }}
+                                                          disabled
+                                                      >
+                                                          Views
+                                                      </IconButton>
+                                                  </ButtonGroup>
+                                              </ButtonToolbar>
+                                          </div>
+                                      </div>
+                                  </Panel>
+                              ))
+                            : favoriteArticles.map((favItem, favIndex) => (
+                                  <Panel
+                                      className={styles.panel}
+                                      header={<h5>{favItem.title}</h5>}
+                                      eventKey={favIndex}
+                                      key={favIndex}
+                                  >
+                                      <div className={styles.panel__info}>
+                                          <p
+                                              className={styles.panel__date}
+                                          >{`Created: ${favItem.created}`}</p>
+                                          <div>
+                                              {favItem.categories !== 0 &&
+                                                  favItem.categories.map(
+                                                      (itemCategory, ind) => (
+                                                          <Badge
+                                                              className={
+                                                                  styles.panel__badge
+                                                              }
+                                                              content={
+                                                                  itemCategory
+                                                              }
+                                                              style={{
+                                                                  background:
+                                                                      '#ff6384',
+                                                                  padding: 5,
+                                                              }}
+                                                              key={ind}
+                                                          />
+                                                      )
+                                                  )}
+                                          </div>
+                                      </div>
+                                      <div className={styles.panel__btnGroup}>
+                                          <ButtonToolbar>
+                                              <ButtonGroup>
+                                                  <IconButton
+                                                      className={
+                                                          styles.panel__button
+                                                      }
+                                                      size="md"
+                                                      icon={
+                                                          <Icon
+                                                              as={FaHeart}
+                                                              style={{
+                                                                  color: 'white',
+                                                              }}
+                                                          />
+                                                      }
+                                                      onClick={
+                                                          toggleFavoriteHandler
+                                                      }
+                                                  />
+                                                  <Button
+                                                      className={
+                                                          styles.panel__button
+                                                      }
+                                                      appearance="primary"
+                                                      size="md"
+                                                      endIcon={<PageNextIcon />}
+                                                      onClick={redirectHandler(
+                                                          favItem.id
+                                                      )}
+                                                  >
+                                                      Read
+                                                  </Button>
+                                              </ButtonGroup>
+                                          </ButtonToolbar>
+                                          <div>
+                                              <ButtonToolbar>
+                                                  <ButtonGroup>
+                                                      <IconButton
+                                                          className={
+                                                              styles.panel__viewButton
+                                                          }
+                                                          size="md"
+                                                          icon={
+                                                              <Icon
+                                                                  as={
+                                                                      VisibleIcon
+                                                                  }
+                                                                  style={{
+                                                                      color: 'white',
+                                                                  }}
+                                                                  className={
+                                                                      styles.panel__viewButton
+                                                                  }
+                                                              />
+                                                          }
+                                                          style={{
+                                                              color: 'white',
+                                                              paddingLeft: 40,
+                                                          }}
+                                                          disabled
+                                                      >
+                                                          Views
+                                                      </IconButton>
+                                                  </ButtonGroup>
+                                              </ButtonToolbar>
+                                          </div>
+                                      </div>
+                                  </Panel>
+                              )))}
                 </PanelGroup>
                 <Panel
                     className={styles.panel__categories}
