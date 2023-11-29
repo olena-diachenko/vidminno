@@ -25,8 +25,9 @@ const Article = props => {
                 >{`Created: ${article.created}`}</p>
                 <p className={styles.panel__date}>
                     {`Categories: `}
-                    {article.categories.map(category => (
+                    {article.categories.map((category, ind) => (
                         <span
+                            key={ind}
                             className={styles.panel__categories}
                         >{`${category} `}</span>
                     ))}
