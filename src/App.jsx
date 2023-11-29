@@ -53,12 +53,12 @@ function App() {
                     element={<ReactHomework />}
                 />
                 <Route
-                    path="/technical-articles"
-                    element={<TechnicalArticles />}
+                    path="/technical-articles/:articleCategory/:articleId"
+                    element={<TechnicalArticle />}
                 />
                 <Route
-                    path="/technical-articles/:articleId"
-                    element={<TechnicalArticle />}
+                    path="/technical-articles/:articleCategory"
+                    element={<TechnicalArticles />}
                 />
                 <Route path="*" element={<NoMatch />} />
             </Routes>
