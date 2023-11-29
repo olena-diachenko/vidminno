@@ -22,6 +22,7 @@ import {
     FaBug,
     FaHtml5,
     FaHeart,
+    FaCheck,
 } from 'react-icons/fa';
 import TagNumberIcon from '@rsuite/icons/TagNumber';
 import VisibleIcon from '@rsuite/icons/Visible';
@@ -29,7 +30,14 @@ import pageTitle from '../../utils/articleCategories';
 import styles from './style.module.scss';
 
 const Articles = props => {
-    const { articles, favoriteArticles, path, category, icon } = props;
+    const {
+        articles,
+        favoriteArticles,
+        path,
+        category,
+        toggleFavorites,
+        icon,
+    } = props;
 
     const navigation = useNavigate();
 
@@ -41,7 +49,23 @@ const Articles = props => {
         navigation(`${path}${e}`);
     };
 
-    const toggleFavoriteHandler = () => {};
+    const toggleFavoriteHandler = item => () => {
+        const article = {
+            title: item.title,
+            content: item.content,
+            viewed: item.viewed,
+            categories: item.categories,
+            isFavorite: !item.isFavorite,
+            id: item.id,
+        };
+
+        const articleInfo = {
+            id: article.id,
+            body: article,
+        };
+
+        toggleFavorites(articleInfo);
+    };
 
     return (
         <Panel bordered shaded>
@@ -101,15 +125,20 @@ const Articles = props => {
                                                       size="md"
                                                       icon={
                                                           <Icon
-                                                              as={FaHeart}
+                                                              as={
+                                                                  item.isFavorite ===
+                                                                  false
+                                                                      ? FaHeart
+                                                                      : FaCheck
+                                                              }
                                                               style={{
                                                                   color: 'white',
                                                               }}
                                                           />
                                                       }
-                                                      onClick={
-                                                          toggleFavoriteHandler
-                                                      }
+                                                      onClick={toggleFavoriteHandler(
+                                                          item
+                                                      )}
                                                   />
                                                   <Button
                                                       className={
@@ -204,15 +233,20 @@ const Articles = props => {
                                                       size="md"
                                                       icon={
                                                           <Icon
-                                                              as={FaHeart}
+                                                              as={
+                                                                  favItem.isFavorite ===
+                                                                  false
+                                                                      ? FaHeart
+                                                                      : FaCheck
+                                                              }
                                                               style={{
                                                                   color: 'white',
                                                               }}
                                                           />
                                                       }
-                                                      onClick={
-                                                          toggleFavoriteHandler
-                                                      }
+                                                      onClick={toggleFavoriteHandler(
+                                                          favItem
+                                                      )}
                                                   />
                                                   <Button
                                                       className={

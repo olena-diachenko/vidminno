@@ -7,6 +7,7 @@ import {
     useGetTechArticlesByCategoryQuery,
     useGetTechArticlesQuery,
     useGetFavoriteTechArticlesQuery,
+    useToggleFavoriteArticlesMutation,
 } from '../../../store/api';
 import Articles from '../../../components/Articles';
 
@@ -17,6 +18,7 @@ const TechnicalArticles = () => {
     const { data: allArticles, isLoading: isLoad } = useGetTechArticlesQuery();
     const { data: favoriteArticles, isLoading: isLoadFavArt } =
         useGetFavoriteTechArticlesQuery();
+    const [toggleFavorites] = useToggleFavoriteArticlesMutation();
     const theme = useSelector(state => state.theme.theme);
 
     const TSIcon = React.forwardRef((props, ref) => (
@@ -47,6 +49,7 @@ const TechnicalArticles = () => {
                     favoriteArticles={!isLoadFavArt && favoriteArticles}
                     path={`/technical-articles/`}
                     category={artCategory}
+                    toggleFavorites={toggleFavorites}
                     icon={TSIcon}
                 />
             )}
