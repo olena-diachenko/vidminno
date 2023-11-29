@@ -13,11 +13,13 @@ import storage from 'redux-persist/lib/storage';
 import { vidminnoApi } from './api';
 import themeReducer from './slices/theme';
 import authReducer from './slices/auth';
+import navMenuReducer from './slices/navMenu';
 
 const rootReducer = combineReducers({
     [vidminnoApi.reducerPath]: vidminnoApi.reducer,
     theme: themeReducer,
     auth: authReducer,
+    navMenu: navMenuReducer,
 });
 
 const persistConfig = {
