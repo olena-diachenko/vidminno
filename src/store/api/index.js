@@ -7,7 +7,7 @@ export const vidminnoApi = createApi({
         baseUrl: API_BASE_URL,
         headers: { 'content-type': 'application/json' },
     }),
-    tagTypes: ['Users', 'UserJsHomework', 'UserReactHomework'],
+    tagTypes: ['Users', 'UserJsHomework', 'UserReactHomework', 'Favorites'],
     endpoints: builder => ({
         getStudentsByGrade: builder.query({
             query: () => `users?sortBy=averageGrade&order=desc`,
@@ -143,6 +143,70 @@ export const vidminnoApi = createApi({
                 { type: 'UserReactHomework', id: 'UserReactHomework' },
             ],
         }),
+
+        getTechArticles: builder.query({
+            query: () => '/technical-articles',
+            providesTags: result =>
+                result
+                    ? [
+                          ...result.map(({ id }) => ({
+                              type: 'Favorites',
+                              id,
+                          })),
+                          {
+                              type: 'Favorites',
+                              id: 'Favorites',
+                          },
+                      ]
+                    : [{ type: 'Favorites', id: 'Favorites' }],
+        }),
+
+        getTechArticlesById: builder.query({
+            query: id => `/technical-articles/${id}`,
+        }),
+
+        getTechArticlesByCategory: builder.query({
+            query: category => `/technical-articles?filter=${category}`,
+            providesTags: result =>
+                result
+                    ? [
+                          ...result.map(({ id }) => ({
+                              type: 'Favorites',
+                              id,
+                          })),
+                          {
+                              type: 'Favorites',
+                              id: 'Favorites',
+                          },
+                      ]
+                    : [{ type: 'Favorites', id: 'Favorites' }],
+        }),
+
+        getFavoriteTechArticles: builder.query({
+            query: () => `/technical-articles?filter=true`,
+            providesTags: result =>
+                result
+                    ? [
+                          ...result.map(({ id }) => ({
+                              type: 'Favorites',
+                              id,
+                          })),
+                          {
+                              type: 'Favorites',
+                              id: 'Favorites',
+                          },
+                      ]
+                    : [{ type: 'Favorites', id: 'Favorites' }],
+        }),
+
+        toggleFavoriteArticles: builder.mutation({
+            query: arg => ({
+                url: `/technical-articles/${arg.id}`,
+                method: 'PUT',
+                body: JSON.stringify(arg.body),
+            }),
+            invalidatesTags: [{ type: 'Favorites', id: 'Favorites' }],
+        }),
     }),
 });
 
@@ -169,4 +233,9 @@ export const {
     useGetReactHomeworksByUserIdQuery,
     useGetReactHomeworksByLessonIdQuery,
     useSaveReactHomeworkByUserIdMutation,
+    useGetTechArticlesQuery,
+    useGetTechArticlesByIdQuery,
+    useGetTechArticlesByCategoryQuery,
+    useGetFavoriteTechArticlesQuery,
+    useToggleFavoriteArticlesMutation,
 } = vidminnoApi;

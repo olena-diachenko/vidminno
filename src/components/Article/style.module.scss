@@ -1,0 +1,34 @@
+@import "src/assets/styles";
+
+.panel {
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 5px 5px 5px $light-background-color;
+  }
+
+  &__headingWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  &__date {
+    font-weight: bolder;
+    color: grey;
+  }
+
+  &__categories {
+    color: #607d8b;
+  }
+
+  &__buttonWrap {
+    margin-bottom: 30px;
+  }
+
+  &__button {
+    min-width: 120px;
+    background-color: $light-background-color!important;
+  }
+}

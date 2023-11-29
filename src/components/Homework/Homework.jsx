@@ -1,6 +1,8 @@
 import { Button, FlexboxGrid, Panel, Progress, Divider } from 'rsuite';
 import PagePreviousIcon from '@rsuite/icons/PagePrevious';
 import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import styles from './style.module.scss';
 import MarkdownEditor from '../MarkdownEditor';
 
@@ -61,7 +63,7 @@ const Homework = props => {
                     >{`Lesson ${homework.lessonId}`}</Link>
                 </div>
                 <Divider />
-                <p className={styles.panel__descWrap}>{homework.description}</p>
+                <p>{homework.description}</p>
             </Panel>
             <FlexboxGrid justify="center" className={styles.panel__buttonWrap}>
                 <Button
@@ -76,17 +78,17 @@ const Homework = props => {
             </FlexboxGrid>
             {currentHomeworks && currentHomeworks.length !== 0 && (
                 <Panel className={styles.panel} bordered shaded>
-                    {currentHomeworks.map(item => (
-                        <>
+                    {currentHomeworks.map((item, index) => (
+                        <React.Fragment key={index}>
                             <div className={styles.panel__hwInfo}>
                                 <p className={styles.panel__subtitle}>{user}</p>
                                 <p
                                     className={styles.panel__date}
                                 >{`Uploaded: ${item.uploadDate}`}</p>
                             </div>
-                            <p>{item.body}</p>
+                            <ReactMarkdown>{item.body}</ReactMarkdown>
                             <Divider />
-                        </>
+                        </React.Fragment>
                     ))}
                 </Panel>
             )}
