@@ -163,19 +163,6 @@ export const vidminnoApi = createApi({
 
         getTechArticlesById: builder.query({
             query: id => `/technical-articles/${id}`,
-            providesTags: result =>
-                result
-                    ? [
-                          ...result.map(({ id }) => ({
-                              type: 'Favorites',
-                              id,
-                          })),
-                          {
-                              type: 'Favorites',
-                              id: 'Favorites',
-                          },
-                      ]
-                    : [{ type: 'Favorites', id: 'Favorites' }],
         }),
 
         getTechArticlesByCategory: builder.query({
