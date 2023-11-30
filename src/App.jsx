@@ -63,6 +63,10 @@ function App() {
                     element={<TechnicalArticle />}
                 />
                 <Route
+                    path="vidminno/technical-articles/"
+                    element={<TechnicalArticles />}
+                />
+                <Route
                     path="vidminno/technical-articles/:articleCategory"
                     element={<TechnicalArticles />}
                 />
