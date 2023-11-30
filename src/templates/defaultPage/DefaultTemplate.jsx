@@ -171,6 +171,7 @@ const DefaultTemplate = props => {
                                 </Nav.Menu>
                                 <Nav.Item
                                     eventKey="4"
+                                    as={NavLink}
                                     icon={<Icon as={FaRegNewspaper} />}
                                     href="/vidminno/technical-articles/"
                                 >
