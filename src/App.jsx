@@ -24,43 +24,49 @@ function App() {
         <CustomProvider theme={theme}>
             <Routes>
                 <Route path="vidminno" element={<HomePage />} />
-                <Route path="/sign-up" element={<SignUp />} />
-                <Route path="/sign-in" element={<SignIn />} />
-                <Route path="/js-course/lessons" element={<JsLessons />} />
+                <Route path="vidminno/sign-up" element={<SignUp />} />
+                <Route path="vidminno/sign-in" element={<SignIn />} />
                 <Route
-                    path="/js-course/lessons/:lessonId"
+                    path="vidminno/js-course/lessons"
+                    element={<JsLessons />}
+                />
+                <Route
+                    path="vidminno/js-course/lessons/:lessonId"
                     element={<JsLesson />}
                 />
-                <Route path="/js-course/homeworks" element={<JSHomeworks />} />
                 <Route
-                    path="/js-course/homeworks/:homeworkId"
+                    path="vidminno/js-course/homeworks"
+                    element={<JSHomeworks />}
+                />
+                <Route
+                    path="vidminno/js-course/homeworks/:homeworkId"
                     element={<JsHomework />}
                 />
                 <Route
-                    path="/react-course/lessons"
+                    path="vidminno/react-course/lessons"
                     element={<ReactLessons />}
                 />
                 <Route
-                    path="/react-course/lessons/:lessonId"
+                    path="vidminno/react-course/lessons/:lessonId"
                     element={<ReactLesson />}
                 />
                 <Route
-                    path="/react-course/homeworks"
+                    path="vidminno/react-course/homeworks"
                     element={<ReactHomeworks />}
                 />
                 <Route
-                    path="/react-course/homeworks/:homeworkId"
+                    path="vidminno/react-course/homeworks/:homeworkId"
                     element={<ReactHomework />}
                 />
                 <Route
-                    path="/technical-articles/:articleCategory/:articleId"
+                    path="vidminno/technical-articles/:articleCategory/:articleId"
                     element={<TechnicalArticle />}
                 />
                 <Route
-                    path="/technical-articles/:articleCategory"
+                    path="vidminno/technical-articles/:articleCategory"
                     element={<TechnicalArticles />}
                 />
-                <Route path="*" element={<NoMatch />} />
+                <Route path="vidminno/*" element={<NoMatch />} />
             </Routes>
         </CustomProvider>
     );

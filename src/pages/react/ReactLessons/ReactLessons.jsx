@@ -18,8 +18,8 @@ const ReactLessons = () => {
                 <Lessons
                     lessons={lessons}
                     homeworks={isLoad ? [] : homeworks}
-                    path={'/react-course/lessons/'}
-                    course={'React Course'}
+                    path="/vidminno/react-course/lessons/"
+                    course="React Course"
                 />
             )}
         </DefaultTemplate>

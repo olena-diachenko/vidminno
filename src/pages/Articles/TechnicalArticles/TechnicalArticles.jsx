@@ -47,7 +47,7 @@ const TechnicalArticles = () => {
                             : articles
                     }
                     favoriteArticles={!isLoadFavArt && favoriteArticles}
-                    path={`/technical-articles/`}
+                    path={`/vidminno/technical-articles/`}
                     category={artCategory}
                     toggleFavorites={toggleFavorites}
                     icon={TSIcon}

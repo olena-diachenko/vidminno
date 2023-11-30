@@ -23,8 +23,8 @@ const ReactHomeworks = () => {
             ) : (
                 <Homeworks
                     homeworks={homeworks}
-                    path={'/react-course/homeworks/'}
-                    course={'React Course'}
+                    path="/vidminno/react-course/homeworks/"
+                    course="React Course"
                     userHomeworks={!isLoadHw && userHomeworks}
                 />
             )}

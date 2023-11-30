@@ -167,7 +167,7 @@ const HomePage = () => {
                             >
                                 <h3 className={styles.dashboard__courseHeading}>
                                     <Link
-                                        to="/js-course/lessons"
+                                        to="/vidminno/js-course/lessons"
                                         className={
                                             styles.dashboard__headingLink
                                         }
@@ -178,7 +178,7 @@ const HomePage = () => {
                                 {!isLoad && (
                                     <DashList
                                         lessons={jsLessons}
-                                        endpoint="/js-course/lessons"
+                                        endpoint="/vidminno/js-course/lessons"
                                     />
                                 )}
                             </Panel>
@@ -198,7 +198,7 @@ const HomePage = () => {
                             >
                                 <h3 className={styles.dashboard__courseHeading}>
                                     <Link
-                                        to="/react-course/lessons"
+                                        to="/vidminno/react-course/lessons"
                                         className={
                                             styles.dashboard__headingLink
                                         }
@@ -209,7 +209,7 @@ const HomePage = () => {
                                 {!isLoadLessons && (
                                     <DashList
                                         lessons={reactLessons}
-                                        endpoint="/react-course/lessons"
+                                        endpoint="/vidminno/react-course/lessons"
                                     />
                                 )}
                             </Panel>

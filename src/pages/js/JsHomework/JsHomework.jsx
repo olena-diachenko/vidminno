@@ -33,7 +33,7 @@ const JsHomework = () => {
                     studentId={studentId}
                     saveHomework={saveHomework}
                     userHomeworks={!isLoadHw && userHomeworks}
-                    path="/js-course/lessons/"
+                    path="/vidminno/js-course/lessons/"
                 />
             )}
         </DefaultTemplate>

@@ -75,7 +75,7 @@ const DefaultTemplate = props => {
                         </strong>
                         <Dropdown.Separator />
                         <Link
-                            to="/sign-in"
+                            to="/vidminno/sign-in"
                             className={styles.popover__link}
                             onClick={handleClick}
                         >
@@ -114,11 +114,7 @@ const DefaultTemplate = props => {
                             </Link>
                         </div>
                     </Sidenav.Header>
-                    <Sidenav
-                        expanded={expand}
-                        defaultOpenKeys={['3']}
-                        appearance="subtle"
-                    >
+                    <Sidenav expanded={expand} appearance="subtle">
                         <Sidenav.Body>
                             <Nav>
                                 <Nav.Item
@@ -139,14 +135,14 @@ const DefaultTemplate = props => {
                                     <Nav.Item
                                         eventKey="2-1"
                                         as={NavLink}
-                                        href="/js-course/lessons"
+                                        href="/vidminno/js-course/lessons"
                                     >
                                         Lessons
                                     </Nav.Item>
                                     <Nav.Item
                                         eventKey="2-2"
                                         as={NavLink}
-                                        href="/js-course/homeworks"
+                                        href="/vidminno/js-course/homeworks"
                                     >
                                         Homeworks
                                     </Nav.Item>
@@ -161,14 +157,14 @@ const DefaultTemplate = props => {
                                     <Nav.Item
                                         eventKey="3-1"
                                         as={NavLink}
-                                        href="/react-course/lessons"
+                                        href="/vidminno/react-course/lessons"
                                     >
                                         Lessons
                                     </Nav.Item>
                                     <Nav.Item
                                         eventKey="3-2"
                                         as={NavLink}
-                                        href="/react-course/homeworks"
+                                        href="/vidminno/react-course/homeworks"
                                     >
                                         Homeworks
                                     </Nav.Item>
@@ -176,7 +172,7 @@ const DefaultTemplate = props => {
                                 <Nav.Item
                                     eventKey="4"
                                     icon={<Icon as={FaRegNewspaper} />}
-                                    href="/technical-articles/all-articles"
+                                    href="/vidminno/technical-articles/all-articles"
                                 >
                                     Technical articles
                                 </Nav.Item>

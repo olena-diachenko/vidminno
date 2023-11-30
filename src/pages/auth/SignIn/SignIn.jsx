@@ -48,7 +48,7 @@ const SignIn = () => {
             <Panel header={<h3>Sign In</h3>} bordered style={{ width: 400 }}>
                 <p style={{ marginBottom: 10 }}>
                     <span className="text-muted">New Here? </span>{' '}
-                    <Link to="/sign-up"> Create an Account</Link>
+                    <Link to="/vidminno/sign-up"> Create an Account</Link>
                 </p>
 
                 <Divider>OR</Divider>

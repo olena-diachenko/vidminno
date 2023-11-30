@@ -26,7 +26,7 @@ const JsLesson = () => {
                     lesson={lesson}
                     addMaterial={!isLoad && addMaterials}
                     homeworks={!isLoadHomeworks && homeworks}
-                    hwPath="/js-course/homeworks/"
+                    hwPath="/vidminno/js-course/homeworks/"
                 />
             )}
         </DefaultTemplate>
