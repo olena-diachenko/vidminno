@@ -65,7 +65,7 @@ const SignUp = () => {
                 >
                     <p>
                         <span>Already have an account?</span>{' '}
-                        <Link to="/sign-in">Sign in here</Link>
+                        <Link to="/vidminno/sign-in">Sign in here</Link>
                     </p>
 
                     <Divider>OR</Divider>
@@ -118,7 +118,7 @@ const SignUp = () => {
             <PopUp
                 open={modal}
                 title="Your account has been successfully created!"
-                path="/sign-in"
+                path="/vidminno/sign-in"
             >
                 You can sign in now.
             </PopUp>

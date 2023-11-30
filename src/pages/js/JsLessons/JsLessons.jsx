@@ -18,8 +18,8 @@ const JsLessons = () => {
                 <Lessons
                     lessons={lessons}
                     homeworks={isLoad ? [] : homeworks}
-                    path={'/js-course/lessons/'}
-                    course={'JS Course'}
+                    path="/vidminno/js-course/lessons/"
+                    course="JS Course"
                 />
             )}
         </DefaultTemplate>

@@ -32,7 +32,7 @@ const ReactHomework = () => {
                     studentId={studentId}
                     saveHomework={saveHomework}
                     userHomeworks={!isLoadHw && userHomeworks}
-                    path="/react-course/lessons/"
+                    path="/vidminno/react-course/lessons/"
                 />
             )}
         </DefaultTemplate>
