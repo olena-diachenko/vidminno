@@ -1,33 +1,27 @@
-## Итоговый проект
+## Name
 
-Вам необходимо создать приложение которое работает аналогично [этому](https://lms.junjun.io/), то-есть повторяет весь функционал кроме аутентификации (по желанию), внешний вид вы собираете из компонентов выбранного вами UI фреймворка.
+Vidminno
 
-UI Фреймворки на выбор:
+## Description
 
-1. [https://mui.com/](https://mui.com/)
-2. [https://rsuitejs.com/](https://rsuitejs.com/)
-3. [https://ant.design/](https://ant.design/)
+This project is a frontend for Learning Management System Vidminno.
 
-API Service  - [https://mockapi.io/](https://mockapi.io/)
+### Prerequisites
 
-Стек:
+`npm` must be installed. Then you must install dependencies using `npm install`
+
+### Run
+
+To run this project locally using `npm`:
+
+`npm run start`
+
+#### Stack:
 
 1. React
 2. Redux
-3. react-router
-4. RTK Query
-5. axios
-6. prettier
-7. eslint (airbnb)
-8. Git
-9. Git Flow: GitHub branching strategy
-10. SCSS modules
-11. icon font from the framework
-12. Charts lib - по вашему выбору
-
-* Вам нужно придерживаться той структуры файлов которую мы изучали на предыдущих уроках.
-* Не забывайте о производительности и декомпозоции
-* Не забывайте выносить вспомогательные функции в отдельные JS файлы
-* Не забывайте рассортировать статические файлы
-
-Проект можно развернуть на github pages или [heroku](https://www.heroku.com/) 
+3. RTK Query
+4. react-router
+5. rsuite
+6. react-markdown
+7. react-chartjs-2
