@@ -1,429 +1,284 @@
 import {
-    Badge,
-    Button,
-    ButtonToolbar,
-    ButtonGroup,
-    RadioTile,
-    RadioTileGroup,
-    Panel,
-    PanelGroup,
-    Divider,
-    IconButton,
+  Badge,
+  Button,
+  ButtonToolbar,
+  ButtonGroup,
+  RadioTile,
+  RadioTileGroup,
+  Panel,
+  PanelGroup,
+  IconButton,
 } from 'rsuite';
 import PageNextIcon from '@rsuite/icons/PageNext';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '@rsuite/icons';
-import {
-    FaJsSquare,
-    FaReact,
-    FaRegNewspaper,
-    FaMicrochip,
-    FaBug,
-    FaHtml5,
-    FaHeart,
-    FaCheck,
-} from 'react-icons/fa';
-import TagNumberIcon from '@rsuite/icons/TagNumber';
+import { FaHeart, FaCheck } from 'react-icons/fa';
 import VisibleIcon from '@rsuite/icons/Visible';
 import PropTypes from 'prop-types';
-import pageTitle from '../../utils/articleCategories';
+import { v4 as uuidv4 } from 'uuid';
+import {
+  categoriesList,
+  categoriesOfArticles,
+  categoriesValues,
+} from './constants';
 import styles from './style.module.scss';
 
-const Articles = props => {
-    const {
-        articles,
-        favoriteArticles,
-        path,
-        category,
-        toggleFavorites,
-        icon,
-    } = props;
+const Articles = ({
+  articles,
+  favoriteArticles,
+  path,
+  category,
+  toggleFavorites,
+}) => {
+  const navigate = useNavigate();
 
-    const navigation = useNavigate();
+  const redirectHandler = value => () => {
+    navigate(`${path}${category}/${value}`);
+  };
 
-    const redirectHandler = value => () => {
-        navigation(`${path}${category}/${value}`);
+  const clickHandler = e => {
+    e === categoriesValues.allArticles
+      ? navigate(`${path}`)
+      : navigate(`${path}${e}`);
+  };
+
+  const toggleFavoriteHandler = item => () => {
+    const article = {
+      title: item.title,
+      content: item.content,
+      viewed: item.viewed,
+      categories: item.categories,
+      isFavorite: !item.isFavorite,
+      id: item.id,
     };
 
-    const clickHandler = e => {
-        navigation(`${path}${e}`);
+    const articleInfo = {
+      id: article.id,
+      body: article,
     };
 
-    const toggleFavoriteHandler = item => () => {
-        const article = {
-            title: item.title,
-            content: item.content,
-            viewed: item.viewed,
-            categories: item.categories,
-            isFavorite: !item.isFavorite,
-            id: item.id,
-        };
+    toggleFavorites(articleInfo);
+  };
 
-        const articleInfo = {
-            id: article.id,
-            body: article,
-        };
-
-        toggleFavorites(articleInfo);
-    };
-
-    return (
-        <Panel bordered shaded>
-            <h3>
-                {pageTitle[category] === undefined
-                    ? 'Articles'
-                    : `Articles / ${pageTitle[category]}`}
-            </h3>
-            <div className={styles.panel__wrap}>
-                <PanelGroup
-                    className={styles.panel__group}
-                    accordion
-                    defaultActiveKey={0}
-                >
-                    {articles &&
-                        (category !== 'favorites'
-                            ? articles.map((item, index) => (
-                                  <Panel
-                                      className={styles.panel}
-                                      header={<h5>{item.title}</h5>}
-                                      eventKey={index}
-                                      key={index}
-                                  >
-                                      <div className={styles.panel__info}>
-                                          <p
-                                              className={styles.panel__date}
-                                          >{`Created: ${item.created}`}</p>
-                                          <div>
-                                              {item.categories !== 0 &&
-                                                  item.categories.map(
-                                                      (itemCategory, ind) => (
-                                                          <Badge
-                                                              className={
-                                                                  styles.panel__badge
-                                                              }
-                                                              content={
-                                                                  itemCategory
-                                                              }
-                                                              style={{
-                                                                  background:
-                                                                      '#ff6384',
-                                                                  padding: 5,
-                                                              }}
-                                                              key={ind}
-                                                          />
-                                                      )
-                                                  )}
-                                          </div>
-                                      </div>
-                                      <div className={styles.panel__btnGroup}>
-                                          <ButtonToolbar>
-                                              <ButtonGroup>
-                                                  <IconButton
-                                                      className={
-                                                          styles.panel__button
-                                                      }
-                                                      size="md"
-                                                      icon={
-                                                          <Icon
-                                                              as={
-                                                                  item.isFavorite ===
-                                                                  false
-                                                                      ? FaHeart
-                                                                      : FaCheck
-                                                              }
-                                                              style={{
-                                                                  color: 'white',
-                                                              }}
-                                                          />
-                                                      }
-                                                      onClick={toggleFavoriteHandler(
-                                                          item
-                                                      )}
-                                                  />
-                                                  <Button
-                                                      className={
-                                                          styles.panel__button
-                                                      }
-                                                      appearance="primary"
-                                                      size="md"
-                                                      endIcon={<PageNextIcon />}
-                                                      onClick={redirectHandler(
-                                                          item.id
-                                                      )}
-                                                  >
-                                                      Read
-                                                  </Button>
-                                              </ButtonGroup>
-                                          </ButtonToolbar>
-                                          <div>
-                                              <ButtonToolbar>
-                                                  <ButtonGroup>
-                                                      <IconButton
-                                                          className={
-                                                              styles.panel__viewButton
-                                                          }
-                                                          size="md"
-                                                          icon={
-                                                              <Icon
-                                                                  as={
-                                                                      VisibleIcon
-                                                                  }
-                                                                  style={{
-                                                                      color: 'white',
-                                                                  }}
-                                                                  className={
-                                                                      styles.panel__viewButton
-                                                                  }
-                                                              />
-                                                          }
-                                                          style={{
-                                                              color: 'white',
-                                                              paddingLeft: 40,
-                                                          }}
-                                                          disabled
-                                                      >
-                                                          Views
-                                                      </IconButton>
-                                                  </ButtonGroup>
-                                              </ButtonToolbar>
-                                          </div>
-                                      </div>
-                                  </Panel>
-                              ))
-                            : favoriteArticles.map((favItem, favIndex) => (
-                                  <Panel
-                                      className={styles.panel}
-                                      header={<h5>{favItem.title}</h5>}
-                                      eventKey={favIndex}
-                                      key={favIndex}
-                                  >
-                                      <div className={styles.panel__info}>
-                                          <p
-                                              className={styles.panel__date}
-                                          >{`Created: ${favItem.created}`}</p>
-                                          <div>
-                                              {favItem.categories !== 0 &&
-                                                  favItem.categories.map(
-                                                      (itemCategory, ind) => (
-                                                          <Badge
-                                                              className={
-                                                                  styles.panel__badge
-                                                              }
-                                                              content={
-                                                                  itemCategory
-                                                              }
-                                                              style={{
-                                                                  background:
-                                                                      '#ff6384',
-                                                                  padding: 5,
-                                                              }}
-                                                              key={ind}
-                                                          />
-                                                      )
-                                                  )}
-                                          </div>
-                                      </div>
-                                      <div className={styles.panel__btnGroup}>
-                                          <ButtonToolbar>
-                                              <ButtonGroup>
-                                                  <IconButton
-                                                      className={
-                                                          styles.panel__button
-                                                      }
-                                                      size="md"
-                                                      icon={
-                                                          <Icon
-                                                              as={
-                                                                  favItem.isFavorite ===
-                                                                  false
-                                                                      ? FaHeart
-                                                                      : FaCheck
-                                                              }
-                                                              style={{
-                                                                  color: 'white',
-                                                              }}
-                                                          />
-                                                      }
-                                                      onClick={toggleFavoriteHandler(
-                                                          favItem
-                                                      )}
-                                                  />
-                                                  <Button
-                                                      className={
-                                                          styles.panel__button
-                                                      }
-                                                      appearance="primary"
-                                                      size="md"
-                                                      endIcon={<PageNextIcon />}
-                                                      onClick={redirectHandler(
-                                                          favItem.id
-                                                      )}
-                                                  >
-                                                      Read
-                                                  </Button>
-                                              </ButtonGroup>
-                                          </ButtonToolbar>
-                                          <div>
-                                              <ButtonToolbar>
-                                                  <ButtonGroup>
-                                                      <IconButton
-                                                          className={
-                                                              styles.panel__viewButton
-                                                          }
-                                                          size="md"
-                                                          icon={
-                                                              <Icon
-                                                                  as={
-                                                                      VisibleIcon
-                                                                  }
-                                                                  style={{
-                                                                      color: 'white',
-                                                                  }}
-                                                                  className={
-                                                                      styles.panel__viewButton
-                                                                  }
-                                                              />
-                                                          }
-                                                          style={{
-                                                              color: 'white',
-                                                              paddingLeft: 40,
-                                                          }}
-                                                          disabled
-                                                      >
-                                                          Views
-                                                      </IconButton>
-                                                  </ButtonGroup>
-                                              </ButtonToolbar>
-                                          </div>
-                                      </div>
-                                  </Panel>
-                              )))}
-                </PanelGroup>
-                <Panel
-                    className={styles.panel__categories}
-                    header={<h4>{'Categories'}</h4>}
-                    bordered
-                >
-                    <RadioTileGroup
-                        defaultValue={`${category}`}
-                        aria-label="Visibility Level"
-                        className={styles.panel__radioWrap}
-                        onChange={clickHandler}
-                    >
-                        <RadioTile
-                            className={styles.panel__radio}
+  return (
+    <Panel bordered shaded>
+      <h3>
+        {categoriesOfArticles[category]
+          ? `Articles / ${categoriesOfArticles[category]}`
+          : 'Articles'}
+      </h3>
+      <div className={styles.panel__wrap}>
+        <PanelGroup
+          className={styles.panel__group}
+          accordion
+          defaultActiveKey={0}
+        >
+          {articles &&
+            (category !== categoriesValues.favorites
+              ? articles.map(item => (
+                  <Panel
+                    className={styles.panel}
+                    header={<h5>{item.title}</h5>}
+                    eventKey={uuidv4()}
+                    key={uuidv4()}
+                  >
+                    <div className={styles.panel__info}>
+                      <p
+                        className={styles.panel__date}
+                      >{`Created: ${item.created}`}</p>
+                      <div>
+                        {item.categories &&
+                          item.categories.map(itemCategory => (
+                            <Badge
+                              className={styles.panel__badge}
+                              content={itemCategory}
+                              key={uuidv4()}
+                            />
+                          ))}
+                      </div>
+                    </div>
+                    <div className={styles.panel__btnGroup}>
+                      <ButtonToolbar>
+                        <ButtonGroup>
+                          <IconButton
+                            className={styles.panel__button}
+                            size="md"
                             icon={
-                                <Icon
-                                    as={FaRegNewspaper}
-                                    className={styles.panel__radioIcon}
-                                />
+                              <Icon
+                                as={!item.isFavorite ? FaHeart : FaCheck}
+                                style={{
+                                  color: '#fff',
+                                }}
+                              />
                             }
-                            label="All articles"
-                            value="all-articles"
-                        ></RadioTile>
-                        <RadioTile
-                            className={styles.panel__radio}
+                            onClick={toggleFavoriteHandler(item)}
+                          />
+                          <Button
+                            className={styles.panel__button}
+                            appearance="primary"
+                            size="md"
+                            endIcon={<PageNextIcon />}
+                            onClick={redirectHandler(item.id)}
+                          >
+                            Read
+                          </Button>
+                        </ButtonGroup>
+                      </ButtonToolbar>
+                      <div>
+                        <ButtonToolbar>
+                          <ButtonGroup>
+                            <IconButton
+                              className={styles.panel__viewButton}
+                              size="md"
+                              icon={
+                                <Icon
+                                  as={VisibleIcon}
+                                  style={{
+                                    color: '#fff',
+                                  }}
+                                  className={styles.panel__viewButton}
+                                />
+                              }
+                              style={{
+                                color: '#fff',
+                                paddingLeft: 40,
+                              }}
+                              disabled
+                            >
+                              Views
+                            </IconButton>
+                          </ButtonGroup>
+                        </ButtonToolbar>
+                      </div>
+                    </div>
+                  </Panel>
+                ))
+              : favoriteArticles.map(favItem => (
+                  <Panel
+                    className={styles.panel}
+                    header={<h5>{favItem.title}</h5>}
+                    eventKey={uuidv4()}
+                    key={uuidv4()}
+                  >
+                    <div className={styles.panel__info}>
+                      <p
+                        className={styles.panel__date}
+                      >{`Created: ${favItem.created}`}</p>
+                      <div>
+                        {favItem.categories &&
+                          favItem.categories.map(itemCategory => (
+                            <Badge
+                              className={styles.panel__badge}
+                              content={itemCategory}
+                              style={{
+                                background: '#ff6384',
+                                padding: 5,
+                              }}
+                              key={uuidv4()}
+                            />
+                          ))}
+                      </div>
+                    </div>
+                    <div className={styles.panel__btnGroup}>
+                      <ButtonToolbar>
+                        <ButtonGroup>
+                          <IconButton
+                            className={styles.panel__button}
+                            size="md"
                             icon={
-                                <Icon
-                                    as={FaHeart}
-                                    className={styles.panel__radioIcon}
-                                />
+                              <Icon
+                                as={!favItem.isFavorite ? FaHeart : FaCheck}
+                                style={{
+                                  color: '#fff',
+                                }}
+                              />
                             }
-                            label="Favorites"
-                            value="favorites"
-                        ></RadioTile>
-                        <Divider />
-                        <RadioTile
-                            className={styles.panel__radio}
-                            icon={
+                            onClick={toggleFavoriteHandler(favItem)}
+                          />
+                          <Button
+                            className={styles.panel__button}
+                            appearance="primary"
+                            size="md"
+                            endIcon={<PageNextIcon />}
+                            onClick={redirectHandler(favItem.id)}
+                          >
+                            Read
+                          </Button>
+                        </ButtonGroup>
+                      </ButtonToolbar>
+                      <div>
+                        <ButtonToolbar>
+                          <ButtonGroup>
+                            <IconButton
+                              className={styles.panel__viewButton}
+                              size="md"
+                              icon={
                                 <Icon
-                                    as={FaMicrochip}
-                                    className={styles.panel__radioIcon}
+                                  as={VisibleIcon}
+                                  style={{
+                                    color: '#fff',
+                                  }}
+                                  className={styles.panel__viewButton}
                                 />
-                            }
-                            label="Architecture"
-                            value="architecture"
-                        ></RadioTile>
-                        <RadioTile
-                            className={styles.panel__radio}
-                            icon={
-                                <Icon
-                                    as={TagNumberIcon}
-                                    className={styles.panel__radioIcon}
-                                />
-                            }
-                            label="Data Types"
-                            value="data-types"
-                        ></RadioTile>
-                        <RadioTile
-                            className={styles.panel__radio}
-                            icon={
-                                <Icon
-                                    as={FaBug}
-                                    className={styles.panel__radioIcon}
-                                />
-                            }
-                            label="Front-end testing"
-                            value="front-end-testing"
-                        ></RadioTile>
-                        <RadioTile
-                            className={styles.panel__radio}
-                            icon={
-                                <Icon
-                                    as={FaHtml5}
-                                    className={styles.panel__radioIcon}
-                                />
-                            }
-                            label="HTML"
-                            value="html"
-                        ></RadioTile>
-                        <RadioTile
-                            className={styles.panel__radio}
-                            icon={
-                                <Icon
-                                    as={FaJsSquare}
-                                    className={styles.panel__radioIcon}
-                                />
-                            }
-                            label="JavaScript"
-                            value="javascript"
-                        ></RadioTile>
-                        <RadioTile
-                            className={styles.panel__radio}
-                            icon={
-                                <Icon
-                                    as={FaReact}
-                                    className={styles.panel__radioIcon}
-                                />
-                            }
-                            label="React"
-                            value="react"
-                        ></RadioTile>
-                        <RadioTile
-                            className={styles.panel__radio}
-                            icon={
-                                <Icon
-                                    as={icon}
-                                    className={styles.panel__radioIcon}
-                                />
-                            }
-                            label="TypeScript"
-                            value="typescript"
-                        ></RadioTile>
-                    </RadioTileGroup>
-                </Panel>
-            </div>
+                              }
+                              style={{
+                                color: '#fff',
+                                paddingLeft: 40,
+                              }}
+                              disabled
+                            >
+                              Views
+                            </IconButton>
+                          </ButtonGroup>
+                        </ButtonToolbar>
+                      </div>
+                    </div>
+                  </Panel>
+                )))}
+        </PanelGroup>
+        <Panel
+          className={styles.panel__categories}
+          header={<h4>{'Categories'}</h4>}
+          bordered
+        >
+          <RadioTileGroup
+            defaultValue={`${category}`}
+            aria-label="Visibility Level"
+            className={styles.panel__radioWrap}
+            onChange={clickHandler}
+          >
+            {categoriesList.map(categoryItem => (
+              <RadioTile
+                key={categoryItem.id}
+                className={
+                  categoryItem.value === categoriesValues.favorites
+                    ? styles.panel__radioFav
+                    : styles.panel__radio
+                }
+                icon={
+                  <Icon
+                    as={categoryItem.icon}
+                    className={styles.panel__radioIcon}
+                  />
+                }
+                label={categoryItem.label}
+                value={categoryItem.value}
+              />
+            ))}
+          </RadioTileGroup>
         </Panel>
-    );
+      </div>
+    </Panel>
+  );
 };
 
 Articles.propTypes = {
-    articles: PropTypes.array,
-    favoriteArticles: PropTypes.array,
-    path: PropTypes.string,
-    category: PropTypes.string,
-    toggleFavorites: PropTypes.func,
+  articles: PropTypes.array || false,
+  favoriteArticles: PropTypes.array,
+  path: PropTypes.string,
+  category: PropTypes.string,
+  toggleFavorites: PropTypes.func,
 };
 
 export default Articles;

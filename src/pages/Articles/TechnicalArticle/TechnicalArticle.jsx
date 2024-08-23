@@ -6,18 +6,18 @@ import Article from '../../../components/Article';
 import DefaultTemplate from '../../../templates/defaultPage';
 
 const TechnicalArticle = () => {
-    const index = useParams().articleId;
-    const { data: article, isLoading } = useGetTechArticlesByIdQuery(index);
+  const { articleId } = useParams();
+  const { data: article, isLoading } = useGetTechArticlesByIdQuery(articleId);
 
-    return (
-        <DefaultTemplate>
-            {isLoading ? (
-                <Loader center={true} size="lg" speed="slow" />
-            ) : (
-                <Article article={article} />
-            )}
-        </DefaultTemplate>
-    );
+  return (
+    <DefaultTemplate>
+      {isLoading ? (
+        <Loader center={true} size="lg" speed="slow" />
+      ) : (
+        <Article article={article} />
+      )}
+    </DefaultTemplate>
+  );
 };
 
 export default TechnicalArticle;

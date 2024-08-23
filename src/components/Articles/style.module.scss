@@ -1,7 +1,6 @@
 @import "src/assets/styles";
 
 .panel {
-
   &__wrap {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -28,6 +27,8 @@
   &__badge {
     margin-right: 20px;
     text-align: center;
+    background-color: $badge-bg-color!important;
+    padding: 5px!important;
   }
 
   &__button {
@@ -56,6 +57,11 @@
 
   &__radio {
     padding: 0 10px!important;
+  }
+
+  &__radioFav {
+    padding: 0 10px!important;
+    margin-bottom: 30px;
   }
 
   &__radioIcon {
