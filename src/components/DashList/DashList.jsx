@@ -3,27 +3,17 @@ import { List, FlexboxGrid } from 'rsuite';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import getComplexity from '../../utils/getComplexity';
+import {
+  styleCenter,
+  titleStyle,
+  dataStyle,
+  lessonDate,
+  lessonHeaderName,
+  lessonName,
+} from './styles';
 
 const DashList = props => {
   const { lessons, endpoint } = props;
-
-  const styleCenter = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '60px',
-  };
-
-  const titleStyle = {
-    fontSize: '1.2em',
-    fontWeight: 500,
-  };
-
-  const dataStyle = {
-    paddingBottom: 5,
-    whiteSpace: 'nowrap',
-    fontWeight: 500,
-  };
 
   return (
     <>
@@ -35,43 +25,19 @@ const DashList = props => {
           colspan={6}
           style={{
             ...styleCenter,
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            overflow: 'hidden',
-            fontWeight: 'bold',
-            fontSize: 16,
+            ...lessonName,
+            ...lessonHeaderName,
           }}
         >
           Lesson name
         </FlexboxGrid.Item>
         <FlexboxGrid.Item colspan={6} style={styleCenter}>
-          <div
-            style={{
-              textAlign: 'right',
-              fontWeight: 'bold',
-              fontSize: 16,
-            }}
-          >
-            Date
-          </div>
+          <div style={lessonHeaderName}>Date</div>
         </FlexboxGrid.Item>
         <FlexboxGrid.Item colspan={6} style={styleCenter}>
-          <div
-            style={{
-              textAlign: 'right',
-              fontWeight: 'bold',
-              fontSize: 16,
-            }}
-          >
-            Complexity
-          </div>
+          <div style={lessonHeaderName}>Complexity</div>
         </FlexboxGrid.Item>
-        <FlexboxGrid.Item
-          colspan={4}
-          style={{
-            ...styleCenter,
-          }}
-        ></FlexboxGrid.Item>
+        <FlexboxGrid.Item colspan={4} style={styleCenter}></FlexboxGrid.Item>
       </FlexboxGrid>
       <List hover>
         {lessons.map((item, index) => (
@@ -84,29 +50,22 @@ const DashList = props => {
                 colspan={6}
                 style={{
                   ...styleCenter,
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  overflow: 'hidden',
+                  ...lessonName,
                 }}
               >
                 <div style={titleStyle}>{item.title}</div>
               </FlexboxGrid.Item>
               <FlexboxGrid.Item colspan={6} style={styleCenter}>
-                <div style={{ textAlign: 'right' }}>
+                <div style={lessonDate}>
                   <div style={dataStyle}>{item.date}</div>
                 </div>
               </FlexboxGrid.Item>
               <FlexboxGrid.Item colspan={6} style={styleCenter}>
-                <div style={{ textAlign: 'right' }}>
+                <div style={lessonDate}>
                   <div style={dataStyle}>{getComplexity(item.complexity)}</div>
                 </div>
               </FlexboxGrid.Item>
-              <FlexboxGrid.Item
-                colspan={4}
-                style={{
-                  ...styleCenter,
-                }}
-              >
+              <FlexboxGrid.Item colspan={4} style={styleCenter}>
                 <Link to={`${endpoint}/${index + 1}`}>View</Link>
               </FlexboxGrid.Item>
             </FlexboxGrid>
