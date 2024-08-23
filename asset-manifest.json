@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/vidminno/static/css/main.02554a87.css",
-    "main.js": "/vidminno/static/js/main.d4d8c282.js",
+    "main.css": "/vidminno/static/css/main.5cf85d1d.css",
+    "main.js": "/vidminno/static/js/main.52b81d3f.js",
     "index.html": "/vidminno/index.html",
-    "main.02554a87.css.map": "/vidminno/static/css/main.02554a87.css.map",
-    "main.d4d8c282.js.map": "/vidminno/static/js/main.d4d8c282.js.map"
+    "main.5cf85d1d.css.map": "/vidminno/static/css/main.5cf85d1d.css.map",
+    "main.52b81d3f.js.map": "/vidminno/static/js/main.52b81d3f.js.map"
   },
   "entrypoints": [
-    "static/css/main.02554a87.css",
-    "static/js/main.d4d8c282.js"
+    "static/css/main.5cf85d1d.css",
+    "static/js/main.52b81d3f.js"
   ]
 }
