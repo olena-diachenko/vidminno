@@ -18,62 +18,56 @@ import NoMatch from './pages/NoMatch';
 import TechnicalArticle from './pages/Articles/TechnicalArticle';
 
 function App() {
-    const theme = useSelector(state => state.theme.theme);
+  const theme = useSelector(state => state.theme.theme);
 
-    return (
-        <CustomProvider theme={theme}>
-            <Routes>
-                <Route path="vidminno" element={<HomePage />} />
-                <Route path="vidminno/sign-up" element={<SignUp />} />
-                <Route path="vidminno/sign-in" element={<SignIn />} />
-                <Route
-                    path="vidminno/js-course/lessons"
-                    element={<JsLessons />}
-                />
-                <Route
-                    path="vidminno/js-course/lessons/:lessonId"
-                    element={<JsLesson />}
-                />
-                <Route
-                    path="vidminno/js-course/homeworks"
-                    element={<JSHomeworks />}
-                />
-                <Route
-                    path="vidminno/js-course/homeworks/:homeworkId"
-                    element={<JsHomework />}
-                />
-                <Route
-                    path="vidminno/react-course/lessons"
-                    element={<ReactLessons />}
-                />
-                <Route
-                    path="vidminno/react-course/lessons/:lessonId"
-                    element={<ReactLesson />}
-                />
-                <Route
-                    path="vidminno/react-course/homeworks"
-                    element={<ReactHomeworks />}
-                />
-                <Route
-                    path="vidminno/react-course/homeworks/:homeworkId"
-                    element={<ReactHomework />}
-                />
-                <Route
-                    path="vidminno/technical-articles/:articleCategory/:articleId"
-                    element={<TechnicalArticle />}
-                />
-                <Route
-                    path="vidminno/technical-articles/"
-                    element={<TechnicalArticles />}
-                />
-                <Route
-                    path="vidminno/technical-articles/:articleCategory"
-                    element={<TechnicalArticles />}
-                />
-                <Route path="vidminno/*" element={<NoMatch />} />
-            </Routes>
-        </CustomProvider>
-    );
+  return (
+    <CustomProvider theme={theme}>
+      <Routes>
+        <Route path="vidminno" element={<HomePage />} />
+        <Route path="vidminno/sign-up" element={<SignUp />} />
+        <Route path="vidminno/sign-in" element={<SignIn />} />
+        <Route path="vidminno/js-course/lessons" element={<JsLessons />} />
+        <Route
+          path="vidminno/js-course/lessons/:lessonId"
+          element={<JsLesson />}
+        />
+        <Route path="vidminno/js-course/homeworks" element={<JSHomeworks />} />
+        <Route
+          path="vidminno/js-course/homeworks/:homeworkId"
+          element={<JsHomework />}
+        />
+        <Route
+          path="vidminno/react-course/lessons"
+          element={<ReactLessons />}
+        />
+        <Route
+          path="vidminno/react-course/lessons/:lessonId"
+          element={<ReactLesson />}
+        />
+        <Route
+          path="vidminno/react-course/homeworks"
+          element={<ReactHomeworks />}
+        />
+        <Route
+          path="vidminno/react-course/homeworks/:homeworkId"
+          element={<ReactHomework />}
+        />
+        <Route
+          path="vidminno/technical-articles/:articleCategory/:articleId"
+          element={<TechnicalArticle />}
+        />
+        <Route
+          path="vidminno/technical-articles/"
+          element={<TechnicalArticles />}
+        />
+        <Route
+          path="vidminno/technical-articles/:articleCategory"
+          element={<TechnicalArticles />}
+        />
+        <Route path="vidminno/*" element={<NoMatch />} />
+      </Routes>
+    </CustomProvider>
+  );
 }
 
 export default App;
