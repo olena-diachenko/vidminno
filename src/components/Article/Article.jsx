@@ -1,17 +1,13 @@
 import { Button, Divider, FlexboxGrid, Panel } from 'rsuite';
 import React from 'react';
 import PagePreviousIcon from '@rsuite/icons/PagePrevious';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './style.module.scss';
+import useRedirectHandler from '../../hooks/useRedirectHandler';
 
 const Article = ({ article }) => {
-  const navigation = useNavigate();
-
-  const backHandler = value => () => {
-    navigation(value);
-  };
+  const redirectHandler = useRedirectHandler();
 
   return (
     <>
@@ -38,7 +34,7 @@ const Article = ({ article }) => {
           appearance="primary"
           size="lg"
           startIcon={<PagePreviousIcon />}
-          onClick={backHandler(-1)}
+          onClick={redirectHandler(-1)}
         >
           Go back
         </Button>
