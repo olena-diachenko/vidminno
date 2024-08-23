@@ -13,10 +13,10 @@ const Homework = props => {
   const { user, homework, userHomeworks, studentId, saveHomework, path } =
     props;
 
+  const redirectHandler = useRedirectHandler();
+
   const currentHomeworks =
     userHomeworks && userHomeworks.filter(hw => hw.hwId === homework.id);
-
-  const redirectHandler = useRedirectHandler();
 
   const handleSend = content => {
     const hw = {
