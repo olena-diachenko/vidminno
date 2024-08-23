@@ -4,33 +4,32 @@ import React from 'react';
 import DefaultTemplate from '../../../templates/defaultPage';
 import Lesson from '../../../components/Lesson';
 import {
-    useGetReactLessonByIdQuery,
-    useGetAddMaterialByReactLessonIdQuery,
-    useGetReactHomeworksByLessonIdQuery,
+  useGetReactLessonByIdQuery,
+  useGetAddMaterialByReactLessonIdQuery,
+  useGetReactHomeworksByLessonIdQuery,
 } from '../../../store/api';
 
 const ReactLesson = () => {
-    const index = useParams().lessonId;
-    const { data: lesson, isLoading } = useGetReactLessonByIdQuery(index);
-    const { data: addMaterials, isLoad } =
-        useGetAddMaterialByReactLessonIdQuery(index);
-    const { data: homeworks, isLoadHomeworks } =
-        useGetReactHomeworksByLessonIdQuery(index);
+  const { lessonId } = useParams();
+  const { data: lesson, isLoading } = useGetReactLessonByIdQuery(lessonId);
+  const { data: addMaterials } =
+    useGetAddMaterialByReactLessonIdQuery(lessonId);
+  const { data: homeworks } = useGetReactHomeworksByLessonIdQuery(lessonId);
 
-    return (
-        <DefaultTemplate>
-            {isLoading ? (
-                <Loader center={true} size="lg" speed="slow" />
-            ) : (
-                <Lesson
-                    lesson={lesson}
-                    addMaterial={!isLoad && addMaterials}
-                    homeworks={!isLoadHomeworks && homeworks}
-                    hwPath="/vidminno/react-course/homeworks/"
-                />
-            )}
-        </DefaultTemplate>
-    );
+  return (
+    <DefaultTemplate>
+      {isLoading ? (
+        <Loader center={true} size="lg" speed="slow" />
+      ) : (
+        <Lesson
+          lesson={lesson}
+          addMaterial={addMaterials || []}
+          homeworks={homeworks || []}
+          hwPath="/vidminno/react-course/homeworks/"
+        />
+      )}
+    </DefaultTemplate>
+  );
 };
 
 export default ReactLesson;

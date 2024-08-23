@@ -3,6 +3,7 @@ import PagePreviousIcon from '@rsuite/icons/PagePrevious';
 import PageNextIcon from '@rsuite/icons/PageNext';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import styles from './style.module.scss';
 import useRedirectHandler from '../../hooks/useRedirectHandler';
 
@@ -26,7 +27,7 @@ const Lesson = props => {
               href={lesson.zoomSrc}
               appearance="primary"
             >
-              Join the lesson
+              Join lesson
             </Button>
           )}
         </div>
@@ -39,17 +40,15 @@ const Lesson = props => {
       </Panel>
       <Panel className={styles.panel} bordered shaded>
         <p className={styles.panel__subtitle}>Additional material</p>
-        {addMaterial
-          ? addMaterial.length === 0 && (
-              <p className={styles.panel__noContent}>
-                There is no additional material
-              </p>
-            )
-          : null}
+        {!addMaterial.length && (
+          <p className={styles.panel__noContent}>
+            There is no additional material
+          </p>
+        )}
         <List size="md" hover>
           {addMaterial ? (
             addMaterial.map((item, index) => (
-              <List.Item key={index} index={index}>
+              <List.Item key={uuidv4()} index={index}>
                 <a
                   className={styles.panel__link}
                   href={item.src}
@@ -67,15 +66,13 @@ const Lesson = props => {
       </Panel>
       <Panel className={styles.panel} bordered shaded>
         <p className={styles.panel__subtitle}>Homeworks</p>
-        {homeworks
-          ? homeworks.length === 0 && (
-              <p className={styles.panel__noContent}>There are no homeworks</p>
-            )
-          : null}
+        {!homeworks.length && (
+          <p className={styles.panel__noContent}>There are no homeworks</p>
+        )}
         <List size="md" hover>
           {homeworks ? (
             homeworks.map((item, index) => (
-              <List.Item key={index} index={index}>
+              <List.Item key={uuidv4()} index={index}>
                 <Link to={`${hwPath}${item.id}`} className={styles.panel__link}>
                   <h6 className={styles.panel__link}>
                     {`HW ${item.id} - ${item.title}`}
@@ -94,7 +91,7 @@ const Lesson = props => {
                     className={styles.panel__hwButton}
                     appearance="primary"
                     size="lg"
-                    endtIcon={<PageNextIcon />}
+                    endIcon={<PageNextIcon />}
                     onClick={redirectHandler(`${hwPath}${item.id}`)}
                   >
                     View

@@ -18,11 +18,20 @@
   &__badge {
     margin-right: 20px;
     text-align: center;
+    background: #ff6384!important;
+    padding: 5px!important;
   }
 
   &__desc {
     display: flex;
     margin-bottom: 20px;
+
+    & > p:first-of-type {
+      margin-right: 5px;
+      margin-top: 8px;
+      display: inline-block;
+      font-weight: 700;
+    }
   }
 
   &__button {
