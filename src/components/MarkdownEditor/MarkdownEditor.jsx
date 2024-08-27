@@ -8,50 +8,50 @@ import PropTypes from 'prop-types';
 import styles from './style.module.scss';
 
 const MarkdownEditor = props => {
-    const divRef = useRef();
-    const editorRef = useRef(null);
-    const theme = useSelector(state => state.theme.theme);
+  const divRef = useRef();
+  const editorRef = useRef(null);
+  const theme = useSelector(state => state.theme.theme);
 
-    useEffect(() => {
-        editorRef.current = new Editor({
-            el: divRef.current,
-            hideModeSwitch: true,
-            theme,
-        });
+  useEffect(() => {
+    editorRef.current = new Editor({
+      el: divRef.current,
+      hideModeSwitch: true,
+      theme,
+    });
 
-        return () => {
-            if (editorRef.current) {
-                editorRef.current.removeHook('change');
-                editorRef.current = null;
-            }
-        };
-    }, [theme]);
-
-    const handleSend = () => {
-        if (props.onSend) {
-            const content = editorRef.current.getMarkdown();
-            props.onSend(content);
-            editorRef.current.setMarkdown('');
-        }
+    return () => {
+      if (editorRef.current) {
+        editorRef.current.removeHook('change');
+        editorRef.current = null;
+      }
     };
+  }, [theme]);
 
-    return (
-        <>
-            <div ref={divRef} className={styles.markdown}></div>
-            <Button
-                className={styles.markdown__button}
-                appearance="primary"
-                size="lg"
-                onClick={handleSend}
-            >
-                Send
-            </Button>
-        </>
-    );
+  const handleSend = () => {
+    if (props.onSend) {
+      const content = editorRef.current.getMarkdown();
+      props.onSend(content);
+      editorRef.current.setMarkdown('');
+    }
+  };
+
+  return (
+    <>
+      <div ref={divRef} className={styles.markdown}></div>
+      <Button
+        className={styles.markdown__button}
+        appearance="primary"
+        size="lg"
+        onClick={handleSend}
+      >
+        Send
+      </Button>
+    </>
+  );
 };
 
 MarkdownEditor.propTypes = {
-    onSend: PropTypes.func,
+  onSend: PropTypes.func,
 };
 
 export default MarkdownEditor;

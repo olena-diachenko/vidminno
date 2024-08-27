@@ -6,6 +6,10 @@
   align-items: center;
   margin-bottom: 20px;
 
+  &__img {
+    width: 250px;
+  }
+
   &__img:not(:last-child) {
     margin-bottom: 20px;
   }
