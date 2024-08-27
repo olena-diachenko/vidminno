@@ -15,7 +15,9 @@ const Article = ({ article }) => {
         <div className={styles.panel__headingWrap}>
           <h3 className={styles.panel__heading}>{`${article.title}`}</h3>
         </div>
-        <p className={styles.panel__date}>{`Created: ${article.created}`}</p>
+        <p className={styles.panel__date}>{`Created: ${new Date(
+          article.created
+        ).toLocaleString()}`}</p>
         <p className={styles.panel__date}>
           {`Categories: `}
           {article.categories.map(category => (

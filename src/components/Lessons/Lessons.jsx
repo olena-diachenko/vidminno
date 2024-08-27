@@ -26,7 +26,9 @@ const Lessons = props => {
               key={uuidv4()}
             >
               <div className={styles.panel__info}>
-                <p className={styles.panel__date}>{`Date: ${item.date}`}</p>
+                <p className={styles.panel__date}>{`Date: ${new Date(
+                  item.date
+                ).toLocaleString()}`}</p>
                 <Badge
                   className={styles.panel__badge}
                   content={

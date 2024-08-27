@@ -41,9 +41,9 @@ const Homework = props => {
           >{`Homework №${homework.id} - ${homework.title} `}</h3>
         </div>
         <div className={styles.panel__infoWrap}>
-          <p
-            className={styles.panel__date}
-          >{`Deadline: ${homework.deadline}`}</p>
+          <p className={styles.panel__date}>{`Deadline: ${new Date(
+            homework.deadline
+          ).toLocaleString()}`}</p>
           <div className={styles.panel__complexityWrap}>
             <p className={styles.panel__complexity}>Complexity</p>
             <Progress.Line

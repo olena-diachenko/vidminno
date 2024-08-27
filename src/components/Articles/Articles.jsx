@@ -63,11 +63,11 @@ const Articles = ({
 
   return (
     <Panel bordered shaded>
-      <h3>
+      <h2>
         {categoriesOfArticles[category]
           ? `Articles / ${categoriesOfArticles[category]}`
           : 'Articles'}
-      </h3>
+      </h2>
       <div className={styles.panel__wrap}>
         <PanelGroup
           className={styles.panel__group}
@@ -84,9 +84,9 @@ const Articles = ({
                     key={uuidv4()}
                   >
                     <div className={styles.panel__info}>
-                      <p
-                        className={styles.panel__date}
-                      >{`Created: ${item.created}`}</p>
+                      <p className={styles.panel__date}>{`Created: ${new Date(
+                        item.created
+                      ).toLocaleString()}`}</p>
                       <div>
                         {item.categories &&
                           item.categories.map(itemCategory => (
@@ -162,9 +162,9 @@ const Articles = ({
                     key={uuidv4()}
                   >
                     <div className={styles.panel__info}>
-                      <p
-                        className={styles.panel__date}
-                      >{`Created: ${favItem.created}`}</p>
+                      <p className={styles.panel__date}>{`Created: ${new Date(
+                        favItem.created
+                      ).toLocaleString()}`}</p>
                       <div>
                         {favItem.categories &&
                           favItem.categories.map(itemCategory => (
@@ -239,7 +239,9 @@ const Articles = ({
         </PanelGroup>
         <Panel
           className={styles.panel__categories}
-          header={<h4>{'Categories'}</h4>}
+          header={
+            <p className={styles.panel__categories_heading}>{'Categories'}</p>
+          }
           bordered
         >
           <RadioTileGroup

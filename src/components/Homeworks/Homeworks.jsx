@@ -23,9 +23,9 @@ const Homeworks = props => {
               key={uuidv4()}
             >
               <div className={styles.panel__info}>
-                <p
-                  className={styles.panel__date}
-                >{`Due by: ${item.deadline}`}</p>
+                <p className={styles.panel__date}>{`Due by: ${new Date(
+                  item.deadline
+                ).toLocaleString()}`}</p>
                 <Badge
                   className={styles.panel__badge}
                   content={

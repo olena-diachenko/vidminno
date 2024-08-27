@@ -20,7 +20,7 @@ const Lesson = props => {
             className={styles.panel__heading}
           >{`Lesson №${lesson.id} - ${lesson.title} `}</h3>
           {lesson.date ? (
-            `The lesson was held on ${lesson.date}`
+            `The lesson was held on ${new Date(lesson.date).toLocaleString()}`
           ) : (
             <Button
               className={styles.panel__button}
@@ -79,7 +79,9 @@ const Lesson = props => {
                   </h6>
                 </Link>
                 <div className={styles.panel__hwContent}>
-                  <p>{`Deadline: ${item.deadline}`}</p>
+                  <p>{`Deadline: ${new Date(
+                    item.deadline
+                  ).toLocaleString()}`}</p>
                   <div className={styles.panel__hwComplexity}>
                     <p>Complexity</p>
                     <Progress.Line
