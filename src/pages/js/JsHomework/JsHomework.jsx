@@ -1,22 +1,22 @@
 import { useParams } from 'react-router-dom';
 import { Loader } from 'rsuite';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import DefaultTemplate from '../../../templates/defaultPage';
 import {
   useGetJsHomeworksByIdQuery,
-  useGetUserByNameQuery,
+  useGetUserByEmailQuery,
   useGetJsHomeworksByUserIdQuery,
   useSaveJsHomeworkByUserIdMutation,
 } from '../../../store/api';
 import Homework from '../../../components/Homework';
+import useAuth from '../../../hooks/useAuth';
 
 const JsHomework = () => {
   const { homeworkId } = useParams();
-  const user = useSelector(state => state.auth.user);
+  const { email } = useAuth();
   const { data: homework, isLoading: isLoad } =
     useGetJsHomeworksByIdQuery(homeworkId);
-  const { data: student, isLoading } = useGetUserByNameQuery(user);
+  const { data: student, isLoading } = useGetUserByEmailQuery(email);
   const studentId = !isLoading && student && student[0]?.id;
   const { data: userHomeworks } = useGetJsHomeworksByUserIdQuery(studentId, {
     skip: !studentId,
@@ -25,11 +25,11 @@ const JsHomework = () => {
 
   return (
     <DefaultTemplate>
-      {isLoad ? (
+      {isLoad || isLoading ? (
         <Loader center={true} size="lg" speed="slow" />
       ) : (
         <Homework
-          user={user}
+          user={student[0].username}
           homework={homework}
           studentId={studentId}
           saveHomework={saveHomework}

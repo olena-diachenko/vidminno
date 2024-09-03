@@ -1,17 +1,17 @@
 import { Loader } from 'rsuite';
-import { useSelector } from 'react-redux';
 import DefaultTemplate from '../../../templates/defaultPage';
 import {
   useGetJsHomeworksByUserIdQuery,
   useGetJsHomeworksQuery,
-  useGetUserByNameQuery,
+  useGetUserByEmailQuery,
 } from '../../../store/api';
 import Homeworks from '../../../components/Homeworks';
+import useAuth from '../../../hooks/useAuth';
 
 const JSHomeworks = () => {
   const { data: homeworks, isLoading } = useGetJsHomeworksQuery();
-  const user = useSelector(state => state.auth.user);
-  const { data: student, isLoading: isLoad } = useGetUserByNameQuery(user);
+  const { email } = useAuth();
+  const { data: student, isLoading: isLoad } = useGetUserByEmailQuery(email);
   const studentId = !isLoad && student && student[0].id;
   const { data: userHomeworks } = useGetJsHomeworksByUserIdQuery(studentId, {
     skip: !studentId,

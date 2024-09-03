@@ -1,52 +1,57 @@
-import { useState, useRef } from 'react';
-import {
-  Form,
-  Button,
-  Panel,
-  InputGroup,
-  Stack,
-  Schema,
-  Divider,
-} from 'rsuite';
+import React, { useState, useRef } from 'react';
+import { Form, Button, Panel, InputGroup, Stack, Divider } from 'rsuite';
 import EyeIcon from '@rsuite/icons/legacy/Eye';
 import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
 import { useCreateUserMutation } from '../../../store/api';
 import PopUp from '../../../components/PopUp';
+import styles from './style.module.scss';
+import model from './validationSchema';
+import initialValues from './constants';
+import { setUser } from '../../../store/slices/auth';
 
 const SignUp = () => {
   const formRef = useRef();
-  const [modal, setModal] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [formValue, setFormValue] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
+  const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [formValues, setFormValues] = useState(initialValues);
   const [createUser] = useCreateUserMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleIconClick = () => setIsVisible(!isVisible);
+
+  const handlePopUpClose = () => setIsOpen(true);
+
+  const handlePopUpClick = () => {
+    navigate('/vidminno');
+    setIsOpen(false);
+  };
 
   const handleSubmit = async e => {
     if (!formRef.current.check()) return;
-    setModal(!modal);
-    await createUser(formValue);
+    const auth = getAuth();
+    const { email, password } = formValues;
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        dispatch(
+          setUser({
+            email: user.email,
+            token: user.accessToken,
+            id: user.uid,
+          })
+        );
+        setFormValues({
+          username: formValues.username,
+          email: user.email,
+        });
+      })
+      .catch(console.error);
+    await createUser(formValues);
+    setIsOpen(true);
   };
-
-  const { StringType } = Schema.Types;
-
-  const model = Schema.Model({
-    username: StringType()
-      .isRequired('This field is required.')
-      .minLength(3, "Can't be less than 3 characters")
-      .maxLength(50, 'Cannot be greater than 50 characters'),
-    email: StringType()
-      .isEmail('Please enter a valid email address.')
-      .isRequired('This field is required.'),
-    password: StringType()
-      .isRequired('This field is required.')
-      .containsLetter('Must contain English characters')
-      .containsNumber('Must contain numbers')
-      .minLength(6, 'Minimum 6 characters required'),
-  });
 
   return (
     <>
@@ -54,19 +59,17 @@ const SignUp = () => {
         justifyContent="center"
         alignItems="center"
         direction="column"
-        style={{
-          height: '100vh',
-        }}
+        className={styles.auth}
       >
         <Panel
-          header={<h3>Create an Account</h3>}
+          header={<p className={styles.auth__headingText}>Create an Account</p>}
           bordered
-          style={{ width: 400 }}
+          className={styles.auth__heading}
         >
-          <p>
+          <div>
             <span>Already have an account?</span>{' '}
             <Link to="/vidminno/sign-in">Sign in here</Link>
-          </p>
+          </div>
 
           <Divider>OR</Divider>
 
@@ -74,8 +77,8 @@ const SignUp = () => {
             fluid
             model={model}
             ref={formRef}
-            onChange={setFormValue}
-            formValue={formValue}
+            onChange={setFormValues}
+            formValue={formValues}
           >
             <Form.Group>
               <Form.ControlLabel>Username</Form.ControlLabel>
@@ -88,14 +91,14 @@ const SignUp = () => {
             </Form.Group>
             <Form.Group>
               <Form.ControlLabel>Password</Form.ControlLabel>
-              <InputGroup inside style={{ width: '100%' }}>
+              <InputGroup inside>
                 <Form.Control
                   name="password"
-                  type={visible ? 'text' : 'password'}
+                  type={isVisible ? 'text' : 'password'}
                   autoComplete="off"
                 />
-                <InputGroup.Button onClick={() => setVisible(!visible)}>
-                  {visible ? <EyeIcon /> : <EyeSlashIcon />}
+                <InputGroup.Button onClick={handleIconClick}>
+                  {isVisible ? <EyeIcon /> : <EyeSlashIcon />}
                 </InputGroup.Button>
               </InputGroup>
             </Form.Group>
@@ -111,11 +114,11 @@ const SignUp = () => {
         </Panel>
       </Stack>
       <PopUp
-        open={modal}
-        title="Your account has been successfully created!"
-        path="/vidminno/sign-in"
+        isOpen={isOpen}
+        onClose={handlePopUpClose}
+        onClick={handlePopUpClick}
       >
-        You can sign in now.
+        Your account has been successfully created!
       </PopUp>
     </>
   );

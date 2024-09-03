@@ -1,39 +1,23 @@
 import { Modal, Button } from 'rsuite';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const PopUp = props => {
-  const modal = props.open;
-  const navigate = useNavigate();
-
-  const handleClose = () => !modal;
-
-  const handleRedirect = () => {
-    navigate(props.path);
-    return !modal;
-  };
-
-  return (
-    <>
-      <Modal open={modal} onClose={handleClose}>
-        <Modal.Header>
-          <Modal.Title>{props.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{props.children}</Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleRedirect} appearance="primary">
-            Ok
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
-};
+const PopUp = ({ isOpen, onClose, onClick, children }) => (
+  <>
+    <Modal open={isOpen} onClose={onClose}>
+      <Modal.Body>{children}</Modal.Body>
+      <Modal.Footer>
+        <Button onClick={onClick} appearance="primary">
+          Ok
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  </>
+);
 
 PopUp.propTypes = {
-  path: PropTypes.string,
-  title: PropTypes.string,
-  open: PropTypes.bool,
+  isOpen: PropTypes.bool,
+  onClose: PropTypes.func,
+  onClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
@@ -41,9 +25,7 @@ PopUp.propTypes = {
 };
 
 PopUp.defaultProps = {
-  path: '/',
-  title: 'Oops!',
-  open: false,
+  isOpen: false,
   children: 'Sorry, something went wrong',
 };
 

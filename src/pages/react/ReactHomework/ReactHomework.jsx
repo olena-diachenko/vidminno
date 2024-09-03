@@ -1,21 +1,21 @@
 import { useParams } from 'react-router-dom';
 import { Loader } from 'rsuite';
-import { useSelector } from 'react-redux';
 import DefaultTemplate from '../../../templates/defaultPage';
 import {
   useGetReactHomeworksByIdQuery,
-  useGetUserByNameQuery,
   useGetReactHomeworksByUserIdQuery,
   useSaveReactHomeworkByUserIdMutation,
+  useGetUserByEmailQuery,
 } from '../../../store/api';
 import Homework from '../../../components/Homework';
+import useAuth from '../../../hooks/useAuth';
 
 const ReactHomework = () => {
   const { homeworkId } = useParams();
-  const user = useSelector(state => state.auth.user);
+  const { email } = useAuth();
   const { data: homework, isLoading: isLoad } =
     useGetReactHomeworksByIdQuery(homeworkId);
-  const { data: student, isLoading } = useGetUserByNameQuery(user);
+  const { data: student, isLoading } = useGetUserByEmailQuery(email);
   const studentId = !isLoading && student && student[0]?.id;
   const { data: userHomeworks } = useGetReactHomeworksByUserIdQuery(studentId, {
     skip: !studentId,
@@ -28,7 +28,7 @@ const ReactHomework = () => {
         <Loader center={true} size="lg" speed="slow" />
       ) : (
         <Homework
-          user={user}
+          user={student.username}
           homework={homework}
           studentId={studentId}
           saveHomework={saveHomework}

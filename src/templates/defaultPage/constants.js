@@ -1,6 +1,5 @@
 const admin = {
-  name: 'Olena',
-  surname: 'Diachenko',
+  email: 'ellenka24@gmail.com',
 };
 
 export default admin;

@@ -30,16 +30,18 @@ import { MdOutlineLightMode } from 'react-icons/md';
 import { changeTheme } from '../../store/slices/theme';
 import admin from './constants';
 import styles from './style.module.scss';
-import { logOut } from '../../store/slices/auth';
+import { removeUser } from '../../store/slices/auth';
 import { setExpand } from '../../store/slices/navMenu';
+import useAuth from '../../hooks/useAuth';
+import { useGetUserByEmailQuery } from '../../store/api';
 
 const DefaultTemplate = props => {
   const expand = useSelector(state => state.navMenu.expand);
   const trigger = React.useRef();
-  const user = useSelector(state => state.auth.user);
+  const { email } = useAuth();
   const theme = useSelector(state => state.theme.theme);
-  const isAdmin = `${admin.name} ${admin.surname}`;
   const dispatch = useDispatch();
+  const { data: student, isLoading } = useGetUserByEmailQuery(email);
 
   const handleChangeTheme = () => {
     dispatch(changeTheme());
@@ -57,7 +59,7 @@ const DefaultTemplate = props => {
     };
 
     const handleClick = () => {
-      dispatch(logOut());
+      dispatch(removeUser());
     };
 
     return (
@@ -70,7 +72,7 @@ const DefaultTemplate = props => {
         <Dropdown.Menu onSelect={handleSelect}>
           <div className={styles.popover__items}>
             <p>Signed in as</p>
-            <strong>{isAdmin === user ? 'Admin' : 'Student'}</strong>
+            <strong>{admin === email ? 'Admin' : 'Student'}</strong>
             <Dropdown.Separator />
             <Link
               to="/vidminno/sign-in"
@@ -187,7 +189,7 @@ const DefaultTemplate = props => {
         <Container>
           <Header className={styles.header}>
             <Stack spacing={20}>
-              <p>{user}</p>
+              {!isLoading && <p>{student[0].username}</p>}
 
               <Whisper
                 placement="bottomEnd"

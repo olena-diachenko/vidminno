@@ -7,6 +7,7 @@ import App from './App.jsx';
 import './assets/styles/index.scss';
 import 'rsuite/dist/rsuite.min.css';
 import store, { persistor } from './store';
+import './firebase';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

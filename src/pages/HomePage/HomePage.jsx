@@ -10,7 +10,6 @@ import {
   Col,
   Loader,
 } from 'rsuite';
-import { useSelector } from 'react-redux';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 import {
@@ -25,9 +24,10 @@ import DashList from '../../components/DashList';
 import Slider from '../../components/Slider';
 import { chartOptions, doughnutData, icons } from './constants';
 import styles from './style.module.scss';
+import useAuth from '../../hooks/useAuth';
 
 const HomePage = () => {
-  const user = useSelector(state => state.auth.user);
+  const { isAuth } = useAuth();
   const { data: users, isLoading } = useGetStudentsByGradeQuery();
   const { data: jsLessons, isLoading: isLoad } = useGetLimitJsLessonsQuery(5);
   const { data: reactLessons, isLoading: isLoadLessons } =
@@ -46,7 +46,7 @@ const HomePage = () => {
     ],
   };
 
-  return user ? (
+  return isAuth ? (
     <DefaultTemplate>
       <div className={styles.dashboard}>
         <FlexboxGrid

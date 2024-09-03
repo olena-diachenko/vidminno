@@ -29,8 +29,8 @@ export const vidminnoApi = createApi({
       invalidatesTags: [{ type: 'Users', id: 'Users' }],
     }),
 
-    getUserByName: builder.query({
-      query: name => `users?search=${name}`,
+    getUserByEmail: builder.query({
+      query: email => `users?search=${email}`,
     }),
 
     getUsefulVideos: builder.query({
@@ -211,7 +211,7 @@ export const vidminnoApi = createApi({
 export const {
   useGetStudentsByGradeQuery,
   useCreateUserMutation,
-  useGetUserByNameQuery,
+  useGetUserByEmailQuery,
   useGetUsefulVideosQuery,
   useGetJsLessonsQuery,
   useGetLimitJsLessonsQuery,
